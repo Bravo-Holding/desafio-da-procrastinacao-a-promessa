@@ -696,7 +696,8 @@
 .ewertton-photo {
   width: 220px;
   height: 220px;
-  border-radius: var(--radius-lg);
+  border-radius: 50%;
+  overflow: hidden;
   background: var(--color-bg);
   border: 3px solid var(--color-accent);
   display: flex;

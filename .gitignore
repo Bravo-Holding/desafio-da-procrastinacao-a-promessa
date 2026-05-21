@@ -3,3 +3,6 @@ briefing-novo-desafio.md
 CLAUDE.md
 .claude/
 .DS_Store
+
+# Fonte de arte (não vai pro deploy; só o og-image.jpg gerado vai)
+banner.png
