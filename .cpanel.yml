@@ -1,0 +1,6 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home1/ewertt82/ebravoholding.com/pages/desafios/v3/
+    - /bin/mkdir -p $DEPLOYPATH
+    - /bin/cp -R index.html style.css favicon $DEPLOYPATH

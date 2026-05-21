@@ -1,0 +1,1744 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Desafio 21 Dias: Da Procrastinação à Promessa</title>
+  <meta name="description"
+    content="21 dias pra sair da procrastinação e parar de enterrar o que Deus te deu por medo. 1 áudio e 1 tarefa por dia no WhatsApp. 15 minutos. R$ 67.">
+  <meta property="og:title" content="Desafio 21 Dias: Da Procrastinação à Promessa">
+  <meta property="og:description" content="1 áudio e 1 tarefa por dia no WhatsApp. 15 minutos. 21 dias. R$ 67.">
+  <meta property="og:type" content="website">
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="favicon/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg">
+  <link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+  <link rel="manifest" href="favicon/site.webmanifest">
+  <meta name="theme-color" content="#E8420A">
+  <!-- Facebook -->
+  <meta name="facebook-domain-verification" content="x3mdskvask209m6cuxpnd6964lbzp1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://connect.facebook.net" />
+  <link rel="preload" as="style"
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&display=swap" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&display=swap"
+    rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&display=swap"
+      rel="stylesheet" />
+  </noscript>
+  <style>
+    /* ============================================================
+       DESIGN SYSTEM — Creme Brutalist Quente
+       Conceito: cartaz de campanha. Urgente, direto, impactante.
+       Oposto total ao dark mode v1.
+    ============================================================ */
+    :root {
+      --color-bg: #F5F0E8;
+      --color-bg-alt: #EDE7D9;
+      --color-ink: #111111;
+      --color-ink-mid: #444444;
+      --color-ink-muted: #777777;
+      --color-accent: #E8420A;
+      --color-accent-h: #C93508;
+      --color-gold: #D4840A;
+      --color-white: #FFFFFF;
+      --color-wa-green: #25D366;
+      --color-wa-bg: #ECE5DD;
+      --color-wa-bubble: #FFFFFF;
+      --color-strike: #888888;
+
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-body: 'Source Sans 3', sans-serif;
+
+      --space-xs: 0.5rem;
+      --space-sm: 1rem;
+      --space-md: 2rem;
+      --space-lg: 4rem;
+      --space-xl: 6rem;
+      --space-2xl: 10rem;
+
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+
+      --shadow-card: 0 2px 16px rgba(0, 0, 0, 0.10);
+      --shadow-wa: 0 4px 24px rgba(0, 0, 0, 0.13);
+
+      --transition: 200ms ease;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--color-bg);
+      color: var(--color-ink);
+      font-family: var(--font-body);
+      font-size: 18px;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    /* ============================================================
+       UTILITIES
+    ============================================================ */
+    .container {
+      width: 100%;
+      max-width: 1100px;
+      margin-inline: auto;
+      padding-inline: 1.25rem;
+    }
+
+    .container--narrow {
+      max-width: 720px;
+      margin-inline: auto;
+      padding-inline: 1.25rem;
+    }
+
+    .section {
+      padding-block: var(--space-lg);
+    }
+
+    .section--xl {
+      padding-block: var(--space-xl);
+    }
+
+    .text-accent {
+      color: var(--color-accent);
+    }
+
+    .text-muted {
+      color: var(--color-ink-muted);
+    }
+
+    .strike {
+      text-decoration: line-through;
+      color: var(--color-strike);
+    }
+
+    /* Fade-up animation */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .fade-up {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+
+    /* ============================================================
+       CTA BUTTON
+    ============================================================ */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: var(--color-accent);
+      color: var(--color-white);
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: 0.02em;
+      padding: 1rem 2rem;
+      border-radius: var(--radius-sm);
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+      min-height: 56px;
+      line-height: 1.2;
+    }
+
+    .btn:hover {
+      background: var(--color-accent-h);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(232, 66, 10, 0.30);
+    }
+
+    .btn--lg {
+      font-size: 1.2rem;
+      padding: 1.2rem 2.5rem;
+      min-height: 64px;
+    }
+
+    .btn--full {
+      width: 100%;
+    }
+
+    /* ============================================================
+       TRUST ANCHORS (below CTA)
+    ============================================================ */
+    .trust-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.5rem;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1rem;
+      font-size: 0.875rem;
+      color: var(--color-ink-muted);
+    }
+
+    .trust-row span {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .trust-row svg {
+      flex-shrink: 0;
+    }
+
+    /* ============================================================
+       SECTION 1 — HERO
+    ============================================================ */
+    #hero {
+      background: var(--color-bg);
+      padding-block: 3rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #hero::before {
+      content: '';
+      position: absolute;
+      top: -80px;
+      right: -120px;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(232, 66, 10, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-md);
+      align-items: center;
+    }
+
+    @media (min-width: 768px) {
+      .hero-inner {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-lg);
+        align-items: center;
+      }
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      background: var(--color-accent);
+      color: var(--color-white);
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.85rem;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+    }
+
+    .hero-h1-p1 {
+      font-family: var(--font-display);
+      font-size: clamp(3.5rem, 9vw, 6.5rem);
+      line-height: 0.92;
+      letter-spacing: 0.01em;
+      color: var(--color-ink);
+      display: block;
+    }
+
+    .hero-h1-p2 {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+      line-height: 1.5;
+      color: var(--color-ink-mid);
+      margin-top: 1.25rem;
+      display: block;
+      max-width: 500px;
+    }
+
+    .hero-sub {
+      margin-top: 1rem;
+      font-size: 1rem;
+      color: var(--color-ink-mid);
+      line-height: 1.7;
+      max-width: 480px;
+    }
+
+    .hero-cta-wrap {
+      margin-top: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    /* ============================================================
+       WHATSAPP MOCKUP
+    ============================================================ */
+    .wa-phone {
+      position: relative;
+      width: 260px;
+      margin-inline: auto;
+    }
+
+    @media (min-width: 768px) {
+      .wa-phone {
+        width: 300px;
+        margin-inline: 0 auto;
+      }
+    }
+
+    .wa-phone-shell {
+      background: #1A1A1A;
+      border-radius: 36px;
+      padding: 12px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35), inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+    }
+
+    .wa-phone-screen {
+      background: var(--color-wa-bg);
+      border-radius: 26px;
+      overflow: hidden;
+    }
+
+    .wa-status-bar {
+      background: #075E54;
+      color: white;
+      font-size: 11px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 14px 4px;
+    }
+
+    .wa-header {
+      background: #075E54;
+      padding: 8px 12px 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .wa-avatar-sm {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--color-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 15px;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .wa-contact-info {
+      flex: 1;
+    }
+
+    .wa-contact-name {
+      color: white;
+      font-weight: 600;
+      font-size: 13px;
+      line-height: 1.2;
+      font-family: var(--font-body);
+    }
+
+    .wa-contact-status {
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 11px;
+      font-family: var(--font-body);
+    }
+
+    .wa-chat-body {
+      background: var(--color-wa-bg);
+      background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c8bba8' fill-opacity='0.15'%3E%3Cpath d='M50 50c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10s-10-4.477-10-10 4.477-10 10-10zM10 10c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10S0 25.523 0 20s4.477-10 10-10zm10 8c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8zm40 40c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      min-height: 200px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .wa-date-badge {
+      text-align: center;
+      font-size: 10px;
+      color: #666;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 10px;
+      padding: 2px 8px;
+      align-self: center;
+      font-family: var(--font-body);
+    }
+
+    .wa-bubble {
+      background: var(--color-wa-bubble);
+      border-radius: 0 12px 12px 12px;
+      padding: 8px 10px;
+      max-width: 85%;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+      font-size: 12px;
+      line-height: 1.5;
+      color: #111;
+      font-family: var(--font-body);
+      position: relative;
+    }
+
+    .wa-bubble-audio {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--color-wa-bubble);
+      border-radius: 0 12px 12px 12px;
+      padding: 10px;
+      max-width: 85%;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+    }
+
+    .wa-audio-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--color-wa-green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .wa-audio-wave {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      height: 24px;
+    }
+
+    .wa-audio-wave span {
+      display: block;
+      width: 3px;
+      border-radius: 2px;
+      background: #128C7E;
+      animation: wave 1.2s ease-in-out infinite;
+    }
+
+    .wa-audio-wave span:nth-child(1) {
+      height: 8px;
+      animation-delay: 0s;
+    }
+
+    .wa-audio-wave span:nth-child(2) {
+      height: 16px;
+      animation-delay: 0.1s;
+    }
+
+    .wa-audio-wave span:nth-child(3) {
+      height: 10px;
+      animation-delay: 0.2s;
+    }
+
+    .wa-audio-wave span:nth-child(4) {
+      height: 20px;
+      animation-delay: 0.3s;
+    }
+
+    .wa-audio-wave span:nth-child(5) {
+      height: 12px;
+      animation-delay: 0.4s;
+    }
+
+    .wa-audio-wave span:nth-child(6) {
+      height: 18px;
+      animation-delay: 0.5s;
+    }
+
+    .wa-audio-wave span:nth-child(7) {
+      height: 8px;
+      animation-delay: 0.6s;
+    }
+
+    .wa-audio-wave span:nth-child(8) {
+      height: 14px;
+      animation-delay: 0.7s;
+    }
+
+    @keyframes wave {
+
+      0%,
+      100% {
+        transform: scaleY(1);
+      }
+
+      50% {
+        transform: scaleY(0.4);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .wa-audio-wave span {
+        animation: none;
+      }
+    }
+
+    .wa-audio-time {
+      font-size: 10px;
+      color: #666;
+      font-family: var(--font-body);
+    }
+
+    .wa-bubble-meta {
+      text-align: right;
+      font-size: 10px;
+      color: #888;
+      margin-top: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 3px;
+      font-family: var(--font-body);
+    }
+
+    .wa-check {
+      color: #4FC3F7;
+      font-size: 12px;
+    }
+
+    .wa-input-bar {
+      background: #F0F0F0;
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .wa-input-field {
+      flex: 1;
+      background: white;
+      border-radius: 20px;
+      padding: 6px 12px;
+      font-size: 12px;
+      color: #888;
+      font-family: var(--font-body);
+    }
+
+    /* Notification overlay animation */
+    .wa-notification {
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1A1A1A;
+      color: white;
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-size: 11px;
+      white-space: nowrap;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+      font-family: var(--font-body);
+      animation: notif-slide 3s ease-in-out infinite 1s;
+    }
+
+    @keyframes notif-slide {
+      0% {
+        opacity: 0.01;
+        transform: translateX(-50%) translateY(-8px);
+      }
+
+      15% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+
+      75% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+
+      100% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-8px);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .wa-notification {
+        animation: none;
+        opacity: 1;
+      }
+    }
+  </style>
+  <!-- CSS não-crítico: seções abaixo do fold — carregado de forma não-bloqueante -->
+  <link rel="stylesheet" href="style.css" media="print" onload="this.media='all'" />
+  <noscript>
+    <link rel="stylesheet" href="style.css" />
+  </noscript>
+  <!-- Meta Pixel: adiado para depois do LCP via requestIdleCallback -->
+  <script>
+    (function () {
+      function loadPixel() {
+        !function (f, b, e, v, n, t, s) {
+          if (f.fbq) return; n = f.fbq = function () {
+            n.callMethod ?
+              n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+          }; if (!f._fbq) f._fbq = n;
+          n.push = n; n.loaded = !0; n.version = '2.0'; n.queue = []; t = b.createElement(e); t.async = !0;
+          t.src = v; s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s)
+        }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '25723610987317406');
+        fbq('track', 'PageView');
+        fbq('track', 'ViewContent');
+      }
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(loadPixel, { timeout: 3000 });
+      } else {
+        window.addEventListener('load', loadPixel);
+      }
+    })();
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=25723610987317406&ev=PageView&noscript=1" alt="" /></noscript>
+</head>
+
+<body>
+
+  <!-- ============================================================
+     SECTION 1 — HERO
+============================================================ -->
+  <section id="hero" class="section--xl">
+    <div class="container">
+      <div class="hero-inner">
+        <!-- Copy -->
+        <div>
+          <span class="hero-eyebrow">Desafio 21 Dias &middot; Da Procrastinação à Promessa</span>
+          <h1>
+            <span class="hero-h1-p1">Você não está esperando em Deus.<br><span class="text-accent">Você está com medo.</span></span>
+            <span class="hero-h1-p2">Todo dia de manhã no seu WhatsApp: 1 áudio curto e 1 tarefa.</span>
+          </h1>
+          <p class="hero-sub">
+            15 minutos por dia, 21 dias, pra parar de enterrar o que Deus te deu e começar a multiplicar.
+          </p>
+          <div class="hero-cta-wrap">
+            <a href="https://pay.hotmart.com/W105539649V?checkoutMode=10" class="btn btn--lg" target="_blank"
+              rel="noopener">
+              Quero entrar no Desafio &middot; R$ 67
+            </a>
+            <div class="trust-row" style="justify-content: flex-start;">
+              <span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  aria-hidden="true">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                </svg>
+                Hotmart
+              </span>
+              <span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+                7 dias de garantia
+              </span>
+              <span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  aria-hidden="true">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                </svg>
+                Acesso hoje
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mockup celular -->
+        <div style="position: relative;">
+          <div class="wa-notification" aria-hidden="true">
+            <strong>Ewertton Bravo</strong> &middot; Dia 1: sua primeira missão chegou
+          </div>
+          <div class="wa-phone">
+            <div class="wa-phone-shell">
+              <div class="wa-phone-screen">
+                <!-- status bar -->
+                <div class="wa-status-bar" aria-hidden="true">
+                  <span>07:32</span>
+                  <span>
+                    <svg width="12" height="10" viewBox="0 0 24 20" fill="white" aria-hidden="true">
+                      <rect x="0" y="10" width="4" height="10" rx="1" />
+                      <rect x="6" y="6" width="4" height="14" rx="1" />
+                      <rect x="12" y="2" width="4" height="18" rx="1" />
+                      <rect x="18" y="0" width="4" height="20" rx="1" />
+                    </svg>
+                  </span>
+                </div>
+                <!-- header -->
+                <div class="wa-header" aria-hidden="true">
+                  <div class="wa-avatar-sm">EB</div>
+                  <div class="wa-contact-info">
+                    <div class="wa-contact-name">Ewertton Bravo</div>
+                    <div class="wa-contact-status">online</div>
+                  </div>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.8)"
+                    stroke-width="2" aria-hidden="true">
+                    <path
+                      d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.27 2.19 2 2 0 012.22 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
+                  </svg>
+                </div>
+                <!-- chat -->
+                <div class="wa-chat-body" aria-label="Conversa de exemplo do desafio">
+                  <div class="wa-date-badge" aria-hidden="true">Hoje</div>
+                  <!-- audio bubble -->
+                  <div class="wa-bubble-audio" role="img" aria-label="Áudio de 2 minutos e 47 segundos de Ewertton">
+                    <div class="wa-audio-icon">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="white" aria-hidden="true">
+                        <polygon points="5 3 19 12 5 21 5 3" />
+                      </svg>
+                    </div>
+                    <div class="wa-audio-wave" aria-hidden="true">
+                      <span></span><span></span><span></span><span></span>
+                      <span></span><span></span><span></span><span></span>
+                    </div>
+                    <span class="wa-audio-time">2:47</span>
+                  </div>
+                  <!-- text bubble -->
+                  <div class="wa-bubble" role="img"
+                    aria-label="Mensagem: Hoje você vai fazer uma coisa. Só uma. E vai fazer direto. As instruções estão aqui embaixo.">
+                    Hoje você vai fazer uma coisa. Só uma. E vai fazer direto. As instruções estão aqui embaixo
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                      style="display:inline;margin-left:4px" aria-hidden="true">
+                      <polyline points="6 9 12 15 18 9" />
+                    </svg>
+                    <div class="wa-bubble-meta" aria-hidden="true">
+                      <span>07:32</span>
+                      <span class="wa-check">&#10003;&#10003;</span>
+                    </div>
+                  </div>
+                </div>
+                <!-- input bar -->
+                <div class="wa-input-bar" aria-hidden="true">
+                  <div class="wa-input-field">Mensagem</div>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2">
+                    <path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z" />
+                    <path d="M19 10v2a7 7 0 01-14 0v-2M12 19v4M8 23h8" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+     SECTION 2 — PROVA RÁPIDA
+============================================================ -->
+  <section id="prova-rapida" class="section">
+    <div class="container">
+      <h2 class="prova-rapida-title fade-up"><span class="text-accent">30 anos.</span><br><span style="font-family:var(--font-body);font-weight:400;font-size:clamp(1rem,2.2vw,1.25rem);line-height:1.5;display:block;margin-top:1rem;color:rgba(255,255,255,0.8);">Foi quanto tempo eu procrastinei antes de descobrir que o problema nunca foi preguiça. Era medo disfarçado de fé.</span></h2>
+      <div class="prova-rapida-grid">
+        <div class="prova-card fade-up" style="transition-delay:0.05s">
+          <div class="prova-card-name">Camila A., 34 &middot; SP</div>
+          <p class="prova-card-text">"terminei o dia 3 e fechei o computador sem aquela culpa de sempre. faz meses que eu não sentia isso."</p>
+        </div>
+        <div class="prova-card fade-up" style="transition-delay:0.10s">
+          <div class="prova-card-name">Rafael M., 28 &middot; BH</div>
+          <p class="prova-card-text">"tava cético. a primeira tarefa já me mostrou que eu nunca tinha feito isso na vida. 15 minutos mesmo."</p>
+        </div>
+        <div class="prova-card fade-up" style="transition-delay:0.15s">
+          <div class="prova-card-name">Juliana P., 41 &middot; Curitiba</div>
+          <p class="prova-card-text">"dia 7 feito. nunca tinha passado da primeira semana de nada que tentei."</p>
+        </div>
+        <div class="prova-card fade-up" style="transition-delay:0.20s">
+          <div class="prova-card-name">Marcos R., 37 &middot; RJ</div>
+          <p class="prova-card-text">"terminei os 21 dias. mudou a minha relação com o trabalho e com a oração."</p>
+        </div>
+      </div>
+      <p class="prova-hook fade-up">Mas como funciona exatamente? Por que 15 minutos por dia resolve o que anos de
+        tentativa n&atilde;o resolveram?</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+     SECTION 3 — O PROBLEMA REAL
+============================================================ -->
+  <section id="problema" class="section--xl">
+    <div class="container--narrow">
+      <h2 class="fade-up">
+        <span class="problema-h1-p1">Não é preguiça.<br><span class="text-accent">É medo.</span></span>
+        <span class="problema-h1-p2">É medo travestido de espiritualidade. "Esperar o tempo de Deus" virou o seu esconderijo.</span>
+      </h2>
+      <div class="problema-body fade-up">
+        <p>Você ora pelo seu chamado e adia o que Ele já mandou fazer. A lista cresce, o domingo à noite pesa, e no fundo bate a frase que você não diz em voz alta: "tenho medo que Deus se decepcione comigo por eu não estar usando o que Ele me deu."</p>
+        <p style="margin-top:1rem">Na Parábola dos Talentos, o servo não foi repreendido por tentar e errar. Foi repreendido por <strong>enterrar o talento com medo.</strong></p>
+      </div>
+      <div class="fade-up" style="transition-delay:0.1s; overflow-x:auto; margin-top:2.5rem;">
+        <table class="vs-table" role="table" aria-label="A mentira que te paralisa vs a verdade que liberta">
+          <thead>
+            <tr>
+              <th class="col-before">A mentira que te paralisa</th>
+              <th class="col-vs">VS</th>
+              <th class="col-after">A verdade que liberta</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="col-before">Estou só esperando o tempo de Deus</td>
+              <td class="col-vs">&#8594;</td>
+              <td class="col-after">Deus abre portas pra quem já está caminhando</td>
+            </tr>
+            <tr>
+              <td class="col-before">Não posso errar fazendo algo pro Senhor</td>
+              <td class="col-vs">&#8594;</td>
+              <td class="col-after">Ele prefere obediência imperfeita à perfeição parada</td>
+            </tr>
+            <tr>
+              <td class="col-before">Preciso de uma confirmação antes de começar</td>
+              <td class="col-vs">&#8594;</td>
+              <td class="col-after">A confirmação vem no movimento, não na paralisia</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="problema-hook fade-up">A saída não é esperar mais. É começar a caminhar.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+     SECTION 4 — COMO FUNCIONA
+============================================================ -->
+  <section id="como-funciona" class="section--xl">
+    <div class="container">
+      <h2 class="cf-headline fade-up">21 dias. 1 tarefa<br>por dia. <span class="text-accent">15 min.</span></h2>
+      <p class="cf-sub fade-up">E cada dia constrói sobre o anterior, como uma corrente que não pode quebrar.</p>
+
+      <div class="fases-grid">
+        <div class="fase-card fade-up" style="transition-delay:0.05s">
+          <div class="fase-num" aria-hidden="true">01</div>
+          <div class="fase-label">Semana 1, Recebe segundo sua capacidade</div>
+          <p class="fase-desc">Você tira tudo da cabeça pro Surrão, faz a primeira grande captura e resolve na hora o que leva menos de 2 minutos. A mente esvazia, o peso sai.</p>
+        </div>
+        <div class="fase-card fade-up" style="transition-delay:0.10s">
+          <div class="fase-num" aria-hidden="true">02</div>
+          <div class="fase-label">Semana 2, Negocia e multiplica</div>
+          <p class="fase-desc">Você separa o que importa do que só grita urgente, dá hora marcada pro que muda sua vida em 6 meses e nomeia o projeto que vinha adiando.</p>
+        </div>
+        <div class="fase-card fade-up" style="transition-delay:0.15s">
+          <div class="fase-num" aria-hidden="true">03</div>
+          <div class="fase-label">Semana 3, Presta contas e entra no gozo</div>
+          <p class="fase-desc">O sistema vira hábito, você presta contas com honestidade (acima de 50% já é vitória) e fecha sabendo quem deixou de ser e quem virou.</p>
+        </div>
+      </div>
+
+      <p class="cf-hook fade-up">Tudo isso por R$ 67. Mas antes do preço, preciso te mostrar algo importante.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+     SECTION 5 — MURAL DE PRINTS
+============================================================ -->
+  <section id="mural" class="section--xl">
+    <div class="container">
+      <h2 class="mural-title fade-up">Eles duvidaram também.<br><span class="text-accent">Depois enviaram isso.</span>
+      </h2>
+
+      <div class="mural-grid">
+
+        <!-- Print 1 — Ana Paula -->
+        <div class="wa-print fade-up" style="transition-delay:0.05s">
+          <div class="wa-print-header" aria-hidden="true">
+            <div class="wa-avatar" style="background:#E8420A;">AP</div>
+            <div>
+              <div class="wa-print-name">Ana Paula</div>
+              <div class="wa-print-status">29 anos &middot; Recife</div>
+            </div>
+          </div>
+          <div class="wa-print-body">
+            <div class="wa-msg" role="img" aria-label="Mensagem de Ana Paula: gente dia 4 e já tô chorando">
+              gente dia 4 e já tô chorando <span aria-hidden="true">&#128557;</span> eu fiz a tarefa de captura e tinha
+              47 coisas na minha cabeça que eu nem sabia que tavam lá. Sinto que respirei pela primeira vez em meses
+              <div class="wa-msg-meta" aria-hidden="true"><span>14:23</span><span
+                  class="wa-check">&#10003;&#10003;</span></div>
+            </div>
+          </div>
+          <div class="wa-print-footer">Dia 4 do Desafio</div>
+        </div>
+
+        <!-- Print 2 — Bruno com resposta -->
+        <div class="wa-print fade-up" style="transition-delay:0.10s">
+          <div class="wa-print-header" aria-hidden="true">
+            <div class="wa-avatar" style="background:#1B4F72;">BT</div>
+            <div>
+              <div class="wa-print-name">Bruno Tavares</div>
+              <div class="wa-print-status">35 anos &middot; S&atilde;o Paulo</div>
+            </div>
+          </div>
+          <div class="wa-print-body" style="display:flex;flex-direction:column;gap:6px">
+            <div class="wa-msg" role="img"
+              aria-label="Mensagem de Bruno: fechei o computador às 18h pela primeira vez em 2 anos">
+              Ewertton eu preciso falar uma coisa. Ontem eu fechei o computador às 18h pela primeira vez em 2 anos. Pela
+              primeira vez. E não me senti culpado.
+              <div class="wa-msg-meta" aria-hidden="true"><span>09:11</span><span
+                  class="wa-check">&#10003;&#10003;</span></div>
+            </div>
+            <div class="wa-msg reply" role="img"
+              aria-label="Resposta de Ewertton: É exatamente isso. Bem-vindo ao outro lado">
+              É exatamente isso. Bem-vindo ao outro lado <span aria-hidden="true">&#128588;</span>
+              <div class="wa-msg-meta" style="color:#555" aria-hidden="true"><span>09:13</span></div>
+            </div>
+          </div>
+          <div class="wa-print-footer">Dia 12 do Desafio</div>
+        </div>
+
+        <!-- Print 3 — Fernanda -->
+        <div class="wa-print fade-up" style="transition-delay:0.15s">
+          <div class="wa-print-header" aria-hidden="true">
+            <div class="wa-avatar" style="background:#1A7340;">FL</div>
+            <div>
+              <div class="wa-print-name">Fernanda Lima</div>
+              <div class="wa-print-status">44 anos &middot; Campinas</div>
+            </div>
+          </div>
+          <div class="wa-print-body">
+            <div class="wa-msg" role="img"
+              aria-label="Mensagem de Fernanda: tentei o GTD, tentei o Notion, tentei bullet journal">
+              tentei o GTD, tentei o Notion, tentei bullet journal. Nada durou. Chegou no dia 14 aqui e ainda tô de pé.
+              Isso nunca tinha acontecido
+              <div class="wa-msg-meta" aria-hidden="true"><span>20:47</span><span
+                  class="wa-check">&#10003;&#10003;</span></div>
+            </div>
+          </div>
+          <div class="wa-print-footer">Dia 14 do Desafio</div>
+        </div>
+
+        <!-- Print 4 — Diego -->
+        <div class="wa-print fade-up" style="transition-delay:0.05s">
+          <div class="wa-print-header" aria-hidden="true">
+            <div class="wa-avatar" style="background:#6C3483;">DC</div>
+            <div>
+              <div class="wa-print-name">Diego Carvalho</div>
+              <div class="wa-print-status">31 anos &middot; Fortaleza</div>
+            </div>
+          </div>
+          <div class="wa-print-body">
+            <div class="wa-msg" role="img"
+              aria-label="Mensagem de Diego: eu era o cara que prometia toda segunda feira que ia mudar">
+              eu era o cara que prometia toda segunda feira que ia mudar. Hoje é terça e eu já fiz a tarefa do dia.
+              Parece bobo mas não é
+              <div class="wa-msg-meta" aria-hidden="true"><span>07:58</span><span
+                  class="wa-check">&#10003;&#10003;</span></div>
+            </div>
+          </div>
+          <div class="wa-print-footer">Dia 2 do Desafio</div>
+        </div>
+
+        <!-- Print 5 — Larissa -->
+        <div class="wa-print fade-up" style="transition-delay:0.10s">
+          <div class="wa-print-header" aria-hidden="true">
+            <div class="wa-avatar" style="background:#C0392B;">LS</div>
+            <div>
+              <div class="wa-print-name">Larissa Souza</div>
+              <div class="wa-print-status">38 anos &middot; Porto Alegre</div>
+            </div>
+          </div>
+          <div class="wa-print-body">
+            <div class="wa-msg" role="img"
+              aria-label="Mensagem de Larissa: meu namorado perguntou o que aconteceu comigo essa semana">
+              meu namorado perguntou o que aconteceu comigo essa semana. Falei que tô num desafio de 15 minutos por dia.
+              Ele não acreditou que era só isso <span aria-hidden="true">&#128514;</span>
+              <div class="wa-msg-meta" aria-hidden="true"><span>11:22</span><span
+                  class="wa-check">&#10003;&#10003;</span></div>
+            </div>
+          </div>
+          <div class="wa-print-footer">Semana 2 do Desafio</div>
+        </div>
+
+        <!-- Print 6 — Rodrigo -->
+        <div class="wa-print fade-up" style="transition-delay:0.15s">
+          <div class="wa-print-header" aria-hidden="true">
+            <div class="wa-avatar" style="background:#B7950B;">RN</div>
+            <div>
+              <div class="wa-print-name">Rodrigo Nunes</div>
+              <div class="wa-print-status">47 anos &middot; Bras&iacute;lia</div>
+            </div>
+          </div>
+          <div class="wa-print-body">
+            <div class="wa-msg" role="img"
+              aria-label="Mensagem de Rodrigo: achei que era mais um produto de produtividade">
+              Vou ser honesto: achei que era mais um produto de produtividade com promessa exagerada. No dia 5 mandei
+              mensagem pra minha esposa dizendo que tinha errado. No bom sentido.
+              <div class="wa-msg-meta" aria-hidden="true"><span>22:03</span><span
+                  class="wa-check">&#10003;&#10003;</span></div>
+            </div>
+          </div>
+          <div class="wa-print-footer">Dia 5 do Desafio</div>
+        </div>
+
+        <!-- Print 7 — Mariana com resposta -->
+        <div class="wa-print fade-up" style="transition-delay:0.05s">
+          <div class="wa-print-header" aria-hidden="true">
+            <div class="wa-avatar" style="background:#148F77;">MC</div>
+            <div>
+              <div class="wa-print-name">Mariana Costa</div>
+              <div class="wa-print-status">26 anos &middot; Belo Horizonte</div>
+            </div>
+          </div>
+          <div class="wa-print-body" style="display:flex;flex-direction:column;gap:6px">
+            <div class="wa-msg" role="img"
+              aria-label="Mensagem de Mariana: GRADUADO, nunca tinha chegado no final de nada">
+              Ewertton GRADUADO <span aria-hidden="true">&#128293;&#128293;&#128293;</span> 21 dias. Nunca tinha chegado
+              no final de nada. Nunca mesmo. Tô aqui chorando igual boba
+              <div class="wa-msg-meta" aria-hidden="true"><span>08:15</span><span
+                  class="wa-check">&#10003;&#10003;</span></div>
+            </div>
+            <div class="wa-msg reply" role="img" aria-label="Resposta de Ewertton: Você conseguiu. Marca a call">
+              Você conseguiu. Agora marca a call, você merece. <span aria-hidden="true">&#128170;</span>
+              <div class="wa-msg-meta" style="color:#555" aria-hidden="true"><span>08:18</span></div>
+            </div>
+          </div>
+          <div class="wa-print-footer">Dia 21 &mdash; Formatura</div>
+        </div>
+
+        <!-- Print 8 — Thiago -->
+        <div class="wa-print fade-up" style="transition-delay:0.10s">
+          <div class="wa-print-header" aria-hidden="true">
+            <div class="wa-avatar" style="background:#922B21;">TM</div>
+            <div>
+              <div class="wa-print-name">Thiago Melo</div>
+              <div class="wa-print-status">33 anos &middot; Manaus</div>
+            </div>
+          </div>
+          <div class="wa-print-body">
+            <div class="wa-msg" role="img" aria-label="Mensagem de Thiago: sou médico, trabalho 12h por dia">
+              Cara eu sou médico, trabalho 12h por dia. Achei que não ia conseguir fazer 15 minutos de nada. Mas o áudio
+              já me deixa no clima antes mesmo de abrir a tarefa. Genial.
+              <div class="wa-msg-meta" aria-hidden="true"><span>19:44</span><span
+                  class="wa-check">&#10003;&#10003;</span></div>
+            </div>
+          </div>
+          <div class="wa-print-footer">Dia 9 do Desafio</div>
+        </div>
+
+        <!-- Print 9 — Patrícia -->
+        <div class="wa-print fade-up" style="transition-delay:0.15s">
+          <div class="wa-print-header" aria-hidden="true">
+            <div class="wa-avatar" style="background:#784212;">PA</div>
+            <div>
+              <div class="wa-print-name">Patr&iacute;cia Alves</div>
+              <div class="wa-print-status">52 anos &middot; Natal</div>
+            </div>
+          </div>
+          <div class="wa-print-body">
+            <div class="wa-msg" role="img"
+              aria-label="Mensagem de Patrícia: tenho 52 anos e pensei que era tarde pra mudar">
+              Tenho 52 anos e pensei que era tarde pra mudar. No dia 3 percebi que não. Obrigada por criar isso
+              <div class="wa-msg-meta" aria-hidden="true"><span>16:08</span><span
+                  class="wa-check">&#10003;&#10003;</span></div>
+            </div>
+          </div>
+          <div class="wa-print-footer">Dia 3 do Desafio</div>
+        </div>
+
+      </div><!-- /mural-grid -->
+
+      <div class="mural-counter fade-up">
+        Mais de <strong>200 pessoas</strong> já completaram o Desafio 21 Dias.
+      </div>
+      <p class="mural-hook fade-up">Você viu o que acontece com eles. Agora veja exatamente o que você recebe.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+     SECTION 6 — ENTREGÁVEIS
+============================================================ -->
+  <section id="entregaveis" class="section--xl">
+    <div class="container">
+      <h2 class="entregaveis-headline fade-up">Tudo que entra no seu<br><span class="text-accent">WhatsApp</span> nos
+        próximos 21 dias</h2>
+
+      <div class="entregaveis-grid">
+
+        <div class="entregavel-card fade-up" style="transition-delay:0.05s">
+          <svg class="entregavel-icon" viewBox="0 0 44 44" fill="none" aria-hidden="true">
+            <circle cx="22" cy="22" r="22" fill="rgba(232,66,10,0.12)" />
+            <path d="M22 12a3 3 0 00-3 3v7a3 3 0 006 0v-7a3 3 0 00-3-3z" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" />
+            <path d="M30 22v1a8 8 0 01-16 0v-1M22 31v3M18 34h8" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <div>
+            <div class="entregavel-title">21 Áudios Diários</div>
+            <p class="entregavel-desc">Toda manhã, entre 7h e 8h: 1 áudio de 2–4 min com Ewertton explicando o dia. Por
+              que aquela tarefa importa. O que você vai sentir. O que fazer se travar.</p>
+          </div>
+        </div>
+
+        <div class="entregavel-card fade-up" style="transition-delay:0.10s">
+          <svg class="entregavel-icon" viewBox="0 0 44 44" fill="none" aria-hidden="true">
+            <circle cx="22" cy="22" r="22" fill="rgba(232,66,10,0.12)" />
+            <rect x="13" y="12" width="18" height="20" rx="3" stroke="currentColor" stroke-width="2" />
+            <path d="M17 18h10M17 22h10M17 26h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+          <div>
+            <div class="entregavel-title">21 Tarefas Claras</div>
+            <p class="entregavel-desc">Cada dia tem 1 instrução. Só 1. Executável em até 15 minutos. Sem ambiguidade.
+              Sem "depende de você decidir por onde começar."</p>
+          </div>
+        </div>
+
+        <div class="entregavel-card fade-up" style="transition-delay:0.15s">
+          <svg class="entregavel-icon" viewBox="0 0 44 44" fill="none" aria-hidden="true">
+            <circle cx="22" cy="22" r="22" fill="rgba(232,66,10,0.12)" />
+            <path d="M16 22l4 4 8-8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+              stroke-linejoin="round" />
+            <rect x="12" y="12" width="20" height="20" rx="4" stroke="currentColor" stroke-width="2" />
+          </svg>
+          <div>
+            <div class="entregavel-title">Checklist de Progresso</div>
+            <p class="entregavel-desc">Um checklist para marcar cada dia. Tem em PDF pra imprimir e em template no
+              Notion. Marcar o check de cada dia é o que mantém as pessoas no trilho.</p>
+          </div>
+        </div>
+
+        <div class="entregavel-card fade-up" style="transition-delay:0.20s">
+          <svg class="entregavel-icon" viewBox="0 0 44 44" fill="none" aria-hidden="true">
+            <circle cx="22" cy="22" r="22" fill="rgba(232,66,10,0.12)" />
+            <path
+              d="M22 14c-4.42 0-8 3.58-8 8 0 1.41.37 2.73 1.01 3.88L14 30l4.12-1.01A7.95 7.95 0 0022 30c4.42 0 8-3.58 8-8s-3.58-8-8-8z"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M19 22h6M19 25h4" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+          <div>
+            <div class="entregavel-title">Acesso direto ao Ewertton</div>
+            <p class="entregavel-desc">Se você travar em algum dia, me manda mensagem no WhatsApp. Respondo.</p>
+          </div>
+        </div>
+
+        <div class="entregavel-card fade-up" style="transition-delay:0.25s">
+          <span class="bonus-tag">Bônus &mdash; R$ 297</span>
+          <div>
+            <svg class="entregavel-icon" viewBox="0 0 44 44" fill="none" aria-hidden="true"
+              style="width:36px;height:36px;margin-bottom:0.5rem">
+              <circle cx="22" cy="22" r="22" fill="rgba(212,132,10,0.15)" />
+              <path d="M22 12c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" stroke="#D4840A" stroke-width="2" />
+              <path d="M22 20c-4.42 0-8 1.79-8 4v2h16v-2c0-2.21-3.58-4-8-4z" stroke="#D4840A" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <div class="entregavel-title" style="color:#D4840A">Call de Próximos Passos</div>
+            <p class="entregavel-desc">Complete os 21 dias, envie o checklist e a palavra GRADUADO no WhatsApp. Você
+              ganha uma call 1:1 com Ewertton para definir o que vem a seguir.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+     SECTION 7 — ANTES VS DEPOIS
+============================================================ -->
+  <section id="antes-depois" class="section--xl">
+    <div class="container">
+      <h2 class="fade-up">
+        <span class="ad-headline-p1">Como você chega na segunda de manhã hoje.</span><br>
+        <span class="ad-headline-p2">Como você vai chegar depois de 21 dias.</span>
+      </h2>
+
+      <div class="ad-grid fade-up">
+        <div class="ad-col ad-col--before">
+          <div class="ad-col-label">Antes</div>
+          <ul class="ad-list" aria-label="Como é antes do desafio">
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2.5"
+                aria-hidden="true">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M15 9l-6 6M9 9l6 6" />
+              </svg>
+              Mente cheia, lista infinita sem começo
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2.5"
+                aria-hidden="true">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M15 9l-6 6M9 9l6 6" />
+              </svg>
+              Culpa acumulada por mais uma semana perdida
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2.5"
+                aria-hidden="true">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M15 9l-6 6M9 9l6 6" />
+              </svg>
+              Ansiedade com tudo que está pendente
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2.5"
+                aria-hidden="true">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M15 9l-6 6M9 9l6 6" />
+              </svg>
+              Semana começa com energia negativa
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2.5"
+                aria-hidden="true">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M15 9l-6 6M9 9l6 6" />
+              </svg>
+              Técnicas que duram até quarta
+            </li>
+          </ul>
+        </div>
+
+        <div class="ad-col ad-col--after">
+          <div class="ad-col-label">Depois</div>
+          <ul class="ad-list" aria-label="Como é depois do desafio">
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E8420A" stroke-width="2.5"
+                aria-hidden="true">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              1 próxima ação clara &mdash; só isso
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E8420A" stroke-width="2.5"
+                aria-hidden="true">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Fim de semana encerrado com sensação de controle
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E8420A" stroke-width="2.5"
+                aria-hidden="true">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Progresso visível: 21 checkmarks na corrente
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E8420A" stroke-width="2.5"
+                aria-hidden="true">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Semana começa com o sistema já pronto
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E8420A" stroke-width="2.5"
+                aria-hidden="true">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Hábito instalado que continua depois do desafio
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+     SECTION 8 — OFERTA + CTA PRINCIPAL
+============================================================ -->
+  <section id="oferta" class="section--xl">
+    <div class="container">
+      <h2 class="oferta-headline fade-up">Primeira turma.<br><span class="text-accent">Preço de lançamento.</span></h2>
+      <p class="oferta-sub fade-up">O preço sobe quando encerrar esse lançamento. Sem data certa. Quando fechar, fecha.
+      </p>
+
+      <div class="oferta-box fade-up">
+        <span class="oferta-tag">Preço de lançamento</span>
+
+        <ul class="oferta-checklist" aria-label="O que está incluído">
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              aria-hidden="true">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+            21 Desafios Diários no WhatsApp
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              aria-hidden="true">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+            21 Áudios com instrução do dia
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              aria-hidden="true">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+            Checklist de Progresso
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              aria-hidden="true">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+            Acesso direto ao Ewertton por WhatsApp durante os 21 dias
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              aria-hidden="true">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+            <strong>Call de Próximos Passos 1:1 &mdash; bônus R$ 297</strong>
+          </li>
+        </ul>
+
+        <div class="oferta-price-block">
+          <div class="oferta-price-de">De R$ 147</div>
+          <div class="oferta-price-por" aria-label="Por R$ 67">R$&nbsp;67</div>
+          <div class="oferta-price-inst">ou 3x de R$ 23,85</div>
+        </div>
+
+        <a href="https://pay.hotmart.com/W105539649V?checkoutMode=10" class="btn btn--lg btn--full" target="_blank"
+          rel="noopener">
+          Quero entrar no Desafio agora
+        </a>
+
+        <div class="trust-row" style="margin-top:1.25rem; font-size:0.8rem">
+          <span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              aria-hidden="true">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
+            Pagamento seguro Hotmart
+          </span>
+          <span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              aria-hidden="true">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+            7 dias de garantia
+          </span>
+          <span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              aria-hidden="true">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+            </svg>
+            Acesso imediato
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+     SECTION 9 — QUEM É EWERTTON
+============================================================ -->
+  <section id="ewertton" class="section--xl">
+    <div class="container">
+      <div class="ewertton-inner">
+        <div class="fade-up">
+          <div class="ewertton-photo" role="img" aria-label="Foto de Ewertton Bravo">
+            Foto Ewertton Bravo
+          </div>
+        </div>
+        <div class="fade-up" style="transition-delay:0.1s">
+          <h2 class="ewertton-headline">Eu também fui o cara que sabia tudo e <span class="text-accent">não fazia
+              nada.</span></h2>
+          <div class="ewertton-body">
+            <p>Por anos eu dominei metodologias de produtividade. Li os livros. Testei os apps. Montei planners
+              elaborados. E continuei travado. Não era falta de informação. Era ausência de sistema.</p>
+            <p style="margin-top:0.75rem">Quando entendi isso, parei de buscar mais técnica e comecei a construir um
+              processo que pudesse funcionar para uma pessoa real, com rotina real, sem disciplina perfeita.</p>
+            <p style="margin-top:0.75rem">O Protocolo CAOS nasceu disso. O Desafio 21 Dias é a versão essencial — o
+              suficiente para instalar o sistema em 3 semanas.</p>
+          </div>
+          <blockquote class="ewertton-quote">"Não falta saber. Falta fazer."</blockquote>
+          <div class="ewertton-cargo">Ewertton Bravo &mdash; Especialista em Anti-Procrastinação</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+     SECTION 10 — MINI MURAL
+============================================================ -->
+  <section id="mini-mural" class="section">
+    <div class="container">
+      <div class="mini-mural-grid">
+
+        <div class="wa-print fade-up" style="transition-delay:0.05s">
+          <div class="wa-print-header" aria-hidden="true">
+            <div class="wa-avatar" style="background:#1A5276;">GR</div>
+            <div>
+              <div class="wa-print-name">Gabriela Ramos</div>
+              <div class="wa-print-status">30 anos &middot; Rio de Janeiro</div>
+            </div>
+          </div>
+          <div class="wa-print-body">
+            <div class="wa-msg" role="img" aria-label="Mensagem de Gabriela: minha chefe perguntou o que mudou em mim">
+              Ewertton hoje minha chefe perguntou o que mudou em mim. Fiquei sem resposta mas por dentro tava rindo
+              <span aria-hidden="true">&#128514;</span> é o desafio
+              <div class="wa-msg-meta" aria-hidden="true"><span>10:05</span><span
+                  class="wa-check">&#10003;&#10003;</span></div>
+            </div>
+          </div>
+          <div class="wa-print-footer">Semana 2 do Desafio</div>
+        </div>
+
+        <div class="wa-print fade-up" style="transition-delay:0.10s">
+          <div class="wa-print-header" aria-hidden="true">
+            <div class="wa-avatar" style="background:#117A65;">CH</div>
+            <div>
+              <div class="wa-print-name">Carlos Henrique</div>
+              <div class="wa-print-status">42 anos &middot; Goiânia</div>
+            </div>
+          </div>
+          <div class="wa-print-body">
+            <div class="wa-msg" role="img"
+              aria-label="Mensagem de Carlos: Dia 10. Eu que achava que procrastinação era minha personalidade">
+              Dia 10. Eu que achava que procrastinação era minha personalidade. Não era.
+              <div class="wa-msg-meta" aria-hidden="true"><span>18:33</span><span
+                  class="wa-check">&#10003;&#10003;</span></div>
+            </div>
+          </div>
+          <div class="wa-print-footer">Dia 10 do Desafio</div>
+        </div>
+
+        <div class="wa-print fade-up" style="transition-delay:0.15s">
+          <div class="wa-print-header" aria-hidden="true">
+            <div class="wa-avatar" style="background:#8E44AD;">AM</div>
+            <div>
+              <div class="wa-print-name">Aline Moreira</div>
+              <div class="wa-print-status">36 anos &middot; Salvador</div>
+            </div>
+          </div>
+          <div class="wa-print-body">
+            <div class="wa-msg" role="img"
+              aria-label="Mensagem de Aline: acordei antes do alarme esperando o áudio chegar">
+              acordei antes do alarme hoje esperando o áudio chegar. Nunca pensei que ia dizer isso <span
+                aria-hidden="true">&#128517;</span>
+              <div class="wa-msg-meta" aria-hidden="true"><span>07:45</span><span
+                  class="wa-check">&#10003;&#10003;</span></div>
+            </div>
+          </div>
+          <div class="wa-print-footer">Semana 2 do Desafio</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+     SECTION 11 — GARANTIA
+============================================================ -->
+  <section id="garantia" class="section--xl">
+    <div class="container--narrow">
+      <!-- Shield SVG -->
+      <div class="garantia-shield fade-up" aria-hidden="true">
+        <svg viewBox="0 0 120 140" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"
+          aria-label="Escudo de garantia 7 dias">
+          <path d="M60 4L8 28v36c0 33.1 22.1 64.1 52 72 29.9-7.9 52-38.9 52-72V28L60 4z" fill="rgba(232,66,10,0.12)"
+            stroke="#E8420A" stroke-width="3" />
+          <text x="60" y="62" text-anchor="middle" font-family="'Bebas Neue', sans-serif" font-size="22" fill="white"
+            font-weight="700">7</text>
+          <text x="60" y="80" text-anchor="middle" font-family="'Bebas Neue', sans-serif" font-size="11"
+            fill="rgba(255,255,255,0.7)" letter-spacing="3">DIAS</text>
+          <path d="M44 95l10 10 22-22" stroke="#E8420A" stroke-width="3.5" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+      </div>
+
+      <h2 class="garantia-headline fade-up">Risco zero.<br><span class="text-accent">Literalmente.</span></h2>
+      <div class="garantia-body fade-up">
+        <p>Se em 7 dias você achar que o Desafio não é pra você — por qualquer motivo — é só mandar mensagem. Devolvo
+          100% do valor. Sem formulário, sem pergunta, sem burocracia.</p>
+        <p>Você não perde nada tentando. Só perde se não tentar.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+     SECTION 12 — FAQ
+============================================================ -->
+  <section id="faq" class="section--xl">
+    <div class="container--narrow">
+      <h2 class="faq-headline fade-up">Antes de ir embora, deixa eu responder<br>o que tá na sua cabeça.</h2>
+      <div class="faq-list fade-up" role="list">
+
+        <div class="faq-item" role="listitem">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-1">
+            Já tentei de tudo. Por que esse seria diferente?
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              aria-hidden="true">
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </button>
+          <div id="faq-1" class="faq-answer" role="region" aria-label="Resposta">
+            Porque esse não depende de você lembrar de usar. Chega no WhatsApp todos os dias. O sistema vem até você —
+            não o contrário. Você não precisa de mais força de vontade. Precisa de menos.
+          </div>
+        </div>
+
+        <div class="faq-item" role="listitem">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-2">
+            15 minutos realmente é suficiente?
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              aria-hidden="true">
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </button>
+          <div id="faq-2" class="faq-answer" role="region" aria-label="Resposta">
+            É. A maioria das pessoas não precisa de mais tempo — precisa de 1 ação clara. Isso é o que o Desafio
+            entrega. Todo dia. Sem sobrecarga.
+          </div>
+        </div>
+
+        <div class="faq-item" role="listitem">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-3">
+            Como recebo o conteúdo?
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              aria-hidden="true">
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </button>
+          <div id="faq-3" class="faq-answer" role="region" aria-label="Resposta">
+            Após a compra no Hotmart, você recebe as instruções para entrar no grupo de WhatsApp. Todo dia de manhã
+            chega o áudio e a tarefa do dia. Simples assim.
+          </div>
+        </div>
+
+        <div class="faq-item" role="listitem">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-4">
+            Precisa saber sobre produtividade ou organização?
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              aria-hidden="true">
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </button>
+          <div id="faq-4" class="faq-answer" role="region" aria-label="Resposta">
+            Não. O Desafio começa do zero. Cada instrução é simples e executável do jeito que você está agora. Sem
+            pré-requisito.
+          </div>
+        </div>
+
+        <div class="faq-item" id="faq-4b" role="listitem">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-4b-answer"
+            aria-label="Consigo falar com você se travar?">
+            Consigo falar com você se travar?
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              aria-hidden="true">
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </button>
+          <div id="faq-4b-answer" class="faq-answer" role="region" aria-label="Resposta">
+            Sim. Me manda no WhatsApp. Travar faz parte — a diferença é não ficar parado sozinho com isso.
+          </div>
+        </div>
+
+        <div class="faq-item" role="listitem">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-5">
+            E depois dos 21 dias?
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              aria-hidden="true">
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </button>
+          <div id="faq-5" class="faq-answer" role="region" aria-label="Resposta">
+            Você sai com o sistema instalado. E se completar com o checklist preenchido, ainda ganha a call 1:1 para
+            definir seus próximos passos com Ewertton.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+     SECTION 13 — CTA FINAL
+============================================================ -->
+  <section id="cta-final" class="section--xl">
+    <div class="container--narrow">
+      <h2 class="cta-final-headline fade-up">Você já sabe o que precisa. A questão é:<br>vai esperar até segunda?</h2>
+      <p class="cta-final-body fade-up">A próxima segunda vai ser igual à anterior se você não mudar o sistema agora.
+        Não amanhã. Agora.</p>
+      <div style="text-align:center" class="fade-up">
+        <a href="https://pay.hotmart.com/W105539649V?checkoutMode=10" class="btn btn--lg btn--invert" target="_blank"
+          rel="noopener">
+          Quero entrar no Desafio &middot; R$ 67
+        </a>
+        <div class="trust-row trust-row--light" style="justify-content:center; margin-top:1rem">
+          <span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              aria-hidden="true">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
+            Pagamento seguro
+          </span>
+          <span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              aria-hidden="true">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+            Garantia 7 dias
+          </span>
+          <span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              aria-hidden="true">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+            </svg>
+            Acesso imediato
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+     FOOTER
+============================================================ -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">EWERTTON BRAVO</div>
+        <nav class="footer-links" aria-label="Links do rodapé">
+          <a href="#">Política de Privacidade</a>
+          <a href="#">Termos de Uso</a>
+          <a href="mailto:ewertton.bravo@gmail.com">ewertton.bravo@gmail.com</a>
+        </nav>
+        <div>@ewerttonbravo</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+     STICKY BAR (mobile)
+============================================================ -->
+  <div class="sticky-bar" role="complementary" aria-label="Chamada para ação fixa">
+    <div class="sticky-bar-text">
+      <strong>Desafio 21 Dias</strong>
+      R$ 67 &middot; 15 min/dia
+    </div>
+    <a href="https://pay.hotmart.com/W105539649V?checkoutMode=10" class="btn" target="_blank" rel="noopener">
+      Entrar agora
+    </a>
+  </div>
+
+  <!-- ============================================================
+     JAVASCRIPT
+============================================================ -->
+  <script>
+    // ─── Intersection Observer — fade-up ───────────────────────
+    (function () {
+      const motionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!motionOK) return;
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.12 }
+      );
+
+      document.querySelectorAll('.fade-up').forEach((el) => observer.observe(el));
+    })();
+
+    // ─── FAQ Accordion ──────────────────────────────────────────
+    document.querySelectorAll('.faq-question').forEach((btn) => {
+      btn.addEventListener('click', function () {
+        const item = this.closest('.faq-item');
+        const isOpen = item.classList.contains('open');
+
+        // fechar todos
+        document.querySelectorAll('.faq-item.open').forEach((openItem) => {
+          openItem.classList.remove('open');
+          openItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+        });
+
+        // abrir o clicado (se estava fechado)
+        if (!isOpen) {
+          item.classList.add('open');
+          this.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
+    // ─── Sticky bar — aparecer após scroll ─────────────────────
+    (function () {
+      const bar = document.querySelector('.sticky-bar');
+      if (!bar) return;
+
+      let shown = false;
+      const onScroll = () => {
+        if (!shown && window.scrollY > 400) {
+          bar.classList.add('show');
+          shown = true;
+          window.removeEventListener('scroll', onScroll);
+        }
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+    })();
+
+    // ─── Smooth scroll ──────────────────────────────────────────
+    document.querySelectorAll('a[href^="#"]').forEach((a) => {
+      a.addEventListener('click', function (e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+  <!-- HOTMART LAUNCHER SDK — carregado de forma não-bloqueante após LCP e scripts críticos -->
+  <script id="hotmart_launcher_script">
+    (function () {
+      function loadHotmart() {
+        (function (l, a, u, n, c, h, e, r) {
+          l['HotmartLauncherObject'] = c; l[c] = l[c] || function () {
+            (l[c].q = l[c].q || []).push(arguments);
+          }; l[c].l = 1 * new Date();
+          h = a.createElement(u); e = a.getElementsByTagName(u)[0];
+          h.async = 1; h.src = 'https://launcher.hotmart.com/launcher.js';
+          e.parentNode.insertBefore(h, e);
+        })(window, document, 'script', 'https://launcher.hotmart.com/launcher.js', 'hot');
+
+        hot('account', 'be7aeb20-4303-3f6c-b0c3-3050352275ba');
+      }
+
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(loadHotmart, { timeout: 4000 });
+      } else {
+        window.addEventListener('load', loadHotmart);
+      }
+    })();
+  </script>
+</body>
+
+</html>
