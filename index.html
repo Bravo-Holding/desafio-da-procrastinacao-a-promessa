@@ -625,7 +625,7 @@
         }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
         fbq('init', '25723610987317406');
         fbq('track', 'PageView');
-        fbq('track', 'ViewContent');
+        fbq('track', 'ViewContent', {value: 67.00, currency: 'BRL'});
       }
       if ('requestIdleCallback' in window) {
         requestIdleCallback(loadPixel, { timeout: 3000 });
