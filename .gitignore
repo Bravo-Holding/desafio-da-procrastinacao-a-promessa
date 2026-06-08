@@ -7,3 +7,6 @@ TODO.md
 
 # Fonte de arte (não vai pro deploy; só o og-image.jpg gerado vai)
 banner.png
+
+# Prints de depoimento: só os .webp vão pro repo/deploy; os .jpg são fonte local
+depoimentos/*.jpg

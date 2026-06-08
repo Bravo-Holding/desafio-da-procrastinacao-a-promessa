@@ -266,6 +266,7 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 1.5rem;
+  align-items: start;
 }
 
 @media (min-width: 600px) {
@@ -310,87 +311,24 @@
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.wa-print-header {
-  background: #075E54;
-  padding: 8px 12px;
-  display: flex;
-  align-items: center;
-  gap: 9px;
+/* Cards de imagem (prints reais): sem rotação pra não atrapalhar a leitura do screenshot.
+   Replica os seletores :nth-child pra igualar a especificidade das regras de rotação acima. */
+.wa-print--img,
+.wa-print--img:nth-child(odd),
+.wa-print--img:nth-child(even),
+.wa-print--img:nth-child(3n) {
+  transform: none;
 }
 
-.wa-avatar {
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: 13px;
-  color: white;
-  flex-shrink: 0;
+.wa-print--img:hover {
+  transform: translateY(-4px);
 }
 
-.wa-print-name {
-  color: white;
-  font-weight: 600;
-  font-size: 12px;
-  font-family: var(--font-body);
-}
-
-.wa-print-status {
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 10px;
-  font-family: var(--font-body);
-}
-
-.wa-print-body {
-  background: var(--color-wa-bg);
-  padding: 12px;
-  min-height: 100px;
-}
-
-.wa-msg {
-  background: var(--color-wa-bubble);
-  border-radius: 0 12px 12px 12px;
-  padding: 9px 11px;
-  font-size: 13px;
-  line-height: 1.55;
-  color: #111;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.10);
-  max-width: 90%;
-  font-family: var(--font-body);
-}
-
-.wa-msg.reply {
-  background: #DCF8C6;
-  border-radius: 12px 0 12px 12px;
-  margin-left: auto;
-  margin-top: 6px;
-}
-
-.wa-msg-meta {
-  text-align: right;
-  font-size: 10px;
-  color: #888;
-  margin-top: 3px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 3px;
-  font-family: var(--font-body);
-}
-
-.wa-print-footer {
-  background: var(--color-bg-alt);
-  padding: 4px 12px 6px;
-  font-size: 10px;
-  color: var(--color-accent);
-  font-weight: 700;
-  font-family: var(--font-body);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+.wa-print--img img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
 }
 
 .mural-counter {
@@ -746,26 +684,6 @@
   font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-}
-
-/* ============================================================
-   SECTION 10 — MINI MURAL
-============================================================ */
-#mini-mural {
-  background: var(--color-bg);
-  padding-block: var(--space-md);
-}
-
-.mini-mural-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-}
-
-@media (min-width: 768px) {
-  .mini-mural-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
 }
 
 /* ============================================================
