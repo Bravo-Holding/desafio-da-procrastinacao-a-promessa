@@ -166,7 +166,7 @@
       align-items: center;
       justify-content: center;
       gap: 0.5rem;
-      background: var(--color-accent);
+      background: #16A34A;
       color: var(--color-white);
       font-family: var(--font-body);
       font-weight: 700;
@@ -180,12 +180,18 @@
       transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
       min-height: 56px;
       line-height: 1.2;
+      box-shadow: 0 3px 0 #0E6B34, 0 4px 10px rgba(0, 0, 0, 0.18);
     }
 
     .btn:hover {
-      background: var(--color-accent-h);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(232, 66, 10, 0.30);
+      background: #15803D;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 0 #0E6B34, 0 6px 14px rgba(0, 0, 0, 0.22);
+    }
+
+    .btn:active {
+      transform: translateY(2px);
+      box-shadow: 0 1px 0 #0E6B34, 0 2px 5px rgba(0, 0, 0, 0.18);
     }
 
     .btn--lg {
@@ -625,7 +631,7 @@
         }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
         fbq('init', '25723610987317406');
         fbq('track', 'PageView');
-        fbq('track', 'ViewContent', {value: 67.00, currency: 'BRL'});
+        fbq('track', 'ViewContent', { value: 67.00, currency: 'BRL' });
       }
       if ('requestIdleCallback' in window) {
         requestIdleCallback(loadPixel, { timeout: 3000 });
@@ -650,7 +656,7 @@
         <div>
           <span class="hero-eyebrow">Desafio 21 Dias &middot; Da Procrastinação à Promessa</span>
           <h1>
-            <span class="hero-h1-p1">Você não está esperando em Deus.<br><span class="text-accent">Você está com medo.</span></span>
+            <span class="hero-h1-p1">Pare de enterrar o talento que Deus te deu.<br><span class="text-accent">Em 21 dias, comece a multiplicá-lo.</span></span>
             <span class="hero-h1-p2">Todo dia de manhã no seu WhatsApp: 1 áudio curto e 1 tarefa.</span>
           </h1>
           <p class="hero-sub">
@@ -659,7 +665,7 @@
           <div class="hero-cta-wrap">
             <a href="https://pay.hotmart.com/W105539649V?checkoutMode=10" class="btn btn--lg" target="_blank"
               rel="noopener">
-              Quero parar de procrastinar
+              Quero desenterrar meu talento
             </a>
             <div class="trust-row" style="justify-content: flex-start;">
               <span>
@@ -767,15 +773,21 @@
 ============================================================ -->
   <section id="prova-rapida" class="section">
     <div class="container">
-      <h2 class="prova-rapida-title fade-up"><span class="text-accent">30 anos.</span><br><span style="font-family:var(--font-body);font-weight:400;font-size:clamp(1rem,2.2vw,1.25rem);line-height:1.5;display:block;margin-top:1rem;color:rgba(255,255,255,0.8);">Foi quanto tempo eu procrastinei antes de descobrir que o problema nunca foi preguiça. Era medo disfarçado de fé.</span></h2>
+      <h2 class="prova-rapida-title fade-up"><span class="text-accent">POR 27 ANOS ENTERREI MEU TALENTO.</span><br><span
+          style="font-family:var(--font-body);font-weight:400;font-size:clamp(1rem,2.2vw,1.25rem);line-height:1.5;display:block;margin-top:1rem;color:rgba(255,255,255,0.8);">Foi
+          quanto tempo eu procrastinei antes de descobrir que o problema nunca foi preguiça. Era medo disfarçado de fé,
+          eu ficava preso no "esperando o tempo de Deus" quando na verdade, Deus já tinha me dado o que eu precisava
+          para agir.</span></h2>
       <div class="prova-rapida-grid">
         <div class="prova-card fade-up" style="transition-delay:0.05s">
           <div class="prova-card-name">Camila A., 34 &middot; SP</div>
-          <p class="prova-card-text">"terminei o dia 3 e fechei o computador sem aquela culpa de sempre. faz meses que eu não sentia isso."</p>
+          <p class="prova-card-text">"terminei o dia 3 e fechei o computador sem aquela culpa de sempre. faz meses que
+            eu não sentia isso."</p>
         </div>
         <div class="prova-card fade-up" style="transition-delay:0.10s">
           <div class="prova-card-name">Rafael M., 28 &middot; BH</div>
-          <p class="prova-card-text">"tava cético. a primeira tarefa já me mostrou que eu nunca tinha feito isso na vida. 20 minutos mesmo."</p>
+          <p class="prova-card-text">"tava cético. a primeira tarefa já me mostrou que eu nunca tinha feito isso na
+            vida. 20 minutos mesmo."</p>
         </div>
         <div class="prova-card fade-up" style="transition-delay:0.15s">
           <div class="prova-card-name">Juliana P., 41 &middot; Curitiba</div>
@@ -797,12 +809,16 @@
   <section id="problema" class="section--xl">
     <div class="container--narrow">
       <h2 class="fade-up">
-        <span class="problema-h1-p1">"Esperar o tempo de Deus"<br>virou o seu <span class="text-accent">esconderijo.</span></span>
+        <span class="problema-h1-p1">"Esperar o tempo de Deus"<br>virou o seu <span
+            class="text-accent">esconderijo.</span></span>
         <span class="problema-h1-p2">Não é preguiça. É medo travestido de espiritualidade.</span>
       </h2>
       <div class="problema-body fade-up">
-        <p>Você ora pelo seu chamado e adia o que Ele já mandou fazer. A lista cresce, o domingo à noite pesa, e no fundo bate a frase que você não diz em voz alta: "tenho medo que Deus se decepcione comigo por eu não estar usando o que Ele me deu."</p>
-        <p style="margin-top:1rem">Na Parábola dos Talentos, o servo não foi repreendido por tentar e errar. Foi repreendido por <strong>enterrar o talento com medo.</strong></p>
+        <p>Você ora pelo seu chamado e adia o que Ele já mandou fazer. A lista cresce, o domingo à noite pesa, e no
+          fundo bate a frase que você não diz em voz alta: "tenho medo que Deus se decepcione comigo por eu não estar
+          usando o que Ele me deu."</p>
+        <p style="margin-top:1rem">Na Parábola dos Talentos, o servo não foi repreendido por tentar e errar. Foi
+          repreendido por <strong>enterrar o talento com medo.</strong></p>
       </div>
       <div class="fade-up" style="transition-delay:0.1s; overflow-x:auto; margin-top:2.5rem;">
         <table class="vs-table" role="table" aria-label="A mentira que te paralisa vs a verdade que liberta">
@@ -833,6 +849,12 @@
         </table>
       </div>
       <p class="problema-hook fade-up">A saída não é esperar mais. É começar a caminhar.</p>
+      <div class="fade-up" style="text-align:center; margin-top:1.75rem">
+        <a href="https://pay.hotmart.com/W105539649V?checkoutMode=10" class="btn btn--lg" target="_blank"
+          rel="noopener">
+          Quero desenterrar meu talento
+        </a>
+      </div>
     </div>
   </section>
 
@@ -841,24 +863,28 @@
 ============================================================ -->
   <section id="como-funciona" class="section--xl">
     <div class="container">
-      <h2 class="cf-headline fade-up">21 dias. 1 tarefa<br>por dia. <span class="text-accent">20 min.</span></h2>
+      <h2 class="cf-headline fade-up">21 dias. 1 tarefa<br>por dia. <span class="text-accent">Talento
+          desenterrado.</span></h2>
       <p class="cf-sub fade-up">E cada dia constrói sobre o anterior, como uma corrente que não pode quebrar.</p>
 
       <div class="fases-grid">
         <div class="fase-card fade-up" style="transition-delay:0.05s">
           <div class="fase-num" aria-hidden="true">01</div>
           <div class="fase-label">Semana 1, Recebe segundo sua capacidade</div>
-          <p class="fase-desc">Você tira tudo da cabeça pro Surrão, faz a primeira grande captura e resolve na hora o que leva menos de 2 minutos. A mente esvazia, o peso sai.</p>
+          <p class="fase-desc">Você esvazia a mente: joga toda pendência num lugar só, o Surrão, e resolve na hora tudo
+            que leva menos de 2 minutos. O peso que você carregou por anos sai em dias.</p>
         </div>
         <div class="fase-card fade-up" style="transition-delay:0.10s">
           <div class="fase-num" aria-hidden="true">02</div>
           <div class="fase-label">Semana 2, Negocia e multiplica</div>
-          <p class="fase-desc">Você separa o que importa do que só grita urgente, dá hora marcada pro que muda sua vida em 6 meses e nomeia o projeto que vinha adiando.</p>
+          <p class="fase-desc">Você para de apagar incêndio. Separa o que muda sua vida em 6 meses do que só grita
+            urgente, dá hora marcada pra isso e finalmente nomeia o projeto que vinha enterrando.</p>
         </div>
         <div class="fase-card fade-up" style="transition-delay:0.15s">
           <div class="fase-num" aria-hidden="true">03</div>
           <div class="fase-label">Semana 3, Presta contas e entra no gozo</div>
-          <p class="fase-desc">O sistema vira hábito, você presta contas com honestidade (acima de 50% já é vitória) e fecha sabendo quem deixou de ser e quem virou.</p>
+          <p class="fase-desc">O sistema vira hábito. Você presta contas com honestidade (passou de 50%, já é vitória) e
+            termina vendo, preto no branco, quem você deixou de ser.</p>
         </div>
       </div>
 
@@ -933,6 +959,12 @@
       </div><!-- /mural-grid -->
 
       <p class="mural-hook fade-up">Você viu o que acontece com eles. Agora veja exatamente o que você recebe.</p>
+      <div class="fade-up" style="text-align:center; margin-top:1.75rem">
+        <a href="https://pay.hotmart.com/W105539649V?checkoutMode=10" class="btn btn--lg" target="_blank"
+          rel="noopener">
+          Quero desenterrar meu talento
+        </a>
+      </div>
     </div>
   </section>
 
@@ -968,7 +1000,8 @@
           </svg>
           <div>
             <div class="entregavel-title">21 Tarefas Claras</div>
-            <p class="entregavel-desc">1 instrução por dia, executável em até 20 minutos. Você não precisa decidir por onde começar.</p>
+            <p class="entregavel-desc">1 instrução por dia, executável em até 20 minutos. Você não precisa decidir por
+              onde começar.</p>
           </div>
         </div>
 
@@ -981,7 +1014,8 @@
           </svg>
           <div>
             <div class="entregavel-title">Planilha Progresso</div>
-            <p class="entregavel-desc">Seu painel único. Preenche 2 números e vê em gráfico o quanto saiu da sua frente.</p>
+            <p class="entregavel-desc">Seu painel único. Preenche 2 números e vê em gráfico o quanto saiu da sua frente.
+            </p>
           </div>
         </div>
 
@@ -1010,7 +1044,9 @@
                 stroke-linecap="round" stroke-linejoin="round" />
             </svg>
             <div class="entregavel-title" style="color:#D4840A">Bônus: 2 aulas + Sessão 1:1</div>
-            <p class="entregavel-desc">Duas aulas bônus: "O que são projetos" (semana 1) e "Google Tasks + Agenda + Drive" (semana 2). Mais uma sessão 1:1 de 30 minutos comigo pra quem completa os 21 dias e envia o progresso.</p>
+            <p class="entregavel-desc">Duas aulas bônus: "O que são projetos" (semana 1) e "Google Tasks + Agenda +
+              Drive" (semana 2). Mais uma sessão 1:1 de 30 minutos comigo pra quem completa os 21 dias e envia o
+              progresso.</p>
           </div>
         </div>
 
@@ -1124,7 +1160,7 @@
 ============================================================ -->
   <section id="oferta" class="section--xl">
     <div class="container">
-      <h2 class="oferta-headline fade-up">Segunda turma.<br><span class="text-accent">Preço de lançamento.</span></h2>
+      <h2 class="oferta-headline fade-up">Quanto vale<br><span class="text-accent">Multiplicar um talento?</span></h2>
       <p class="oferta-sub fade-up">O preço sobe quando encerrar esse lançamento. Sem data certa. Quando fechar, fecha.
       </p>
 
@@ -1215,15 +1251,25 @@
       <div class="ewertton-inner">
         <div class="fade-up">
           <div class="ewertton-photo">
-            <img src="ewertton-preto.jpg" alt="Foto de Ewertton Bravo" width="220" height="220" style="width:100%;height:100%;object-fit:cover;display:block;">
+            <img src="ewertton-preto.jpg" alt="Foto de Ewertton Bravo" width="220" height="220"
+              style="width:100%;height:100%;object-fit:cover;display:block;">
           </div>
         </div>
         <div class="fade-up" style="transition-delay:0.1s">
-          <h2 class="ewertton-headline">Meu problema nunca foi preguiça.<br>Era <span class="text-accent">medo disfarçado de fé.</span></h2>
+          <h2 class="ewertton-headline">Meu problema nunca foi preguiça.<br>Era <span class="text-accent">medo
+              disfarçado de fé.</span></h2>
           <div class="ewertton-body">
-            <p>Eu procrastinei 30 anos. Do ensino fundamental aos 38. Sabia o que precisava fazer e não fazia, e ainda carregava a culpa de estar enterrando o que Deus tinha me dado.</p>
-            <p style="margin-top:0.75rem">Em fevereiro de 2024 minha filha nasceu e eu fiz uma promessa diante de Deus: ela não vai me ouvir contar o que eu poderia ter sido, vai me ver vivendo o que fui chamado a fazer. Larguei mais de 20 anos de CLT. E descobri que meu problema nunca foi preguiça nem falta de tempo. Era medo travestido de espiritualidade.</p>
-            <p style="margin-top:0.75rem">Esse desafio é o caminho que eu queria ter recebido lá atrás, a porta de entrada do Método Remiyah. Remiyah é a palavra que a Bíblia usa pra negligência na obra de Deus (Jeremias 48:10). Dei esse nome porque o método existe pra matar exatamente isso: o cristão que enterra o que recebeu por medo de tentar. A Parábola dos Talentos costura tudo: você não recebeu o que tem pra enterrar por medo. Recebeu pra multiplicar.</p>
+            <p>Eu procrastinei 27 anos. Do ensino fundamental aos 38. Sabia o que precisava fazer e não fazia, e ainda
+              carregava a culpa de estar enterrando o que Deus tinha me dado.</p>
+            <p style="margin-top:0.75rem">Em fevereiro de 2024 minha filha nasceu e eu fiz uma promessa diante de Deus:
+              ela não vai me ouvir contar o que eu poderia ter sido, vai me ver vivendo o que fui chamado a fazer.
+              Larguei mais de 20 anos de CLT. E descobri que meu problema nunca foi preguiça nem falta de tempo. Era
+              medo travestido de espiritualidade.</p>
+            <p style="margin-top:0.75rem">Esse desafio é o caminho que eu queria ter recebido lá atrás, a porta de
+              entrada do Método Remiyah. Remiyah é a palavra que a Bíblia usa pra negligência na obra de Deus (Jeremias
+              48:10). Dei esse nome porque o método existe pra matar exatamente isso: o cristão que enterra o que
+              recebeu por medo de tentar. A Parábola dos Talentos costura tudo: você não recebeu o que tem pra enterrar
+              por medo. Recebeu pra multiplicar.</p>
           </div>
           <blockquote class="ewertton-quote">"Tiro cristãos da procrastinação. Ponto."</blockquote>
           <div class="ewertton-cargo">Ewertton Bravo &middot; Fé e Procrastinação</div>
@@ -1389,10 +1435,11 @@
 ============================================================ -->
   <section id="cta-final" class="section--xl">
     <div class="container--narrow">
-      <h2 class="cta-final-headline fade-up">Você já sabe o que Deus te chamou pra fazer. A pergunta é:<br>vai esperar mais uma "segunda que nunca vem"?</h2>
+      <h2 class="cta-final-headline fade-up">Você já sabe o que Deus te chamou pra fazer. A pergunta é:<br>vai esperar
+        mais uma "segunda que nunca vem"?</h2>
       <p class="cta-final-body fade-up">A próxima vai ser igual à anterior se você não mudar o sistema agora.</p>
       <div style="text-align:center" class="fade-up">
-        <a href="https://pay.hotmart.com/W105539649V?checkoutMode=10" class="btn btn--lg btn--invert" target="_blank"
+        <a href="https://pay.hotmart.com/W105539649V?checkoutMode=10" class="btn btn--lg" target="_blank"
           rel="noopener">
           Quero sair do amanhã &middot; R$ 67
         </a>
