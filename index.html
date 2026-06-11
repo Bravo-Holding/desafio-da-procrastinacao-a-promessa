@@ -1620,6 +1620,44 @@
       }
     })();
   </script>
+  <!-- ORIGEM DAS VENDAS (UTM + sck) — Daniela Tiemi / Fluxo Copia e Cola © 2024. Reescreve hrefs no load; injeta sck nos links Hotmart/Kiwify. Ver CLAUDE.md > RASTREAMENTO DE VENDAS. -->
+  <script>
+    var currentUrl = window.location.href;
+    var url = new URL(currentUrl);
+    var pagePath = url.pathname.replace(/^\/|\/$/g, '');
+    var cleanReferrer = document.referrer ? document.referrer.replace(/^https?:\/\//, '') : '';
+    var utmSource = url.searchParams.get('utm_source') || cleanReferrer || 'Direto';
+    var utmMedium = url.searchParams.get('utm_medium') || 'Organico';
+    var utmCampaign = url.searchParams.get('utm_campaign') || 'Direto';
+    var utmContent = url.searchParams.get('utm_content') || pagePath || 'Home';
+    var utmTerm = url.searchParams.get('utm_term') || '';
+    var links = document.querySelectorAll('a');
+    for (var i = 0; i < links.length; i++) {
+      if (!links[i].hasAttribute('popup')) {
+        var destinationUrl = links[i].href;
+        if (!destinationUrl.includes('#')) {
+          var hasUtmParams = destinationUrl.includes('utm_source') ||
+            destinationUrl.includes('utm_medium') ||
+            destinationUrl.includes('utm_campaign') ||
+            destinationUrl.includes('utm_content') ||
+            destinationUrl.includes('utm_term');
+          if (!hasUtmParams) {
+            destinationUrl += (destinationUrl.indexOf('?') === -1 ? '?' : '&');
+            destinationUrl += 'utm_source=' + utmSource;
+            destinationUrl += '&utm_medium=' + utmMedium;
+            destinationUrl += '&utm_campaign=' + utmCampaign;
+            destinationUrl += '&utm_content=' + utmContent;
+            destinationUrl += '&utm_term=' + utmTerm;
+            if (destinationUrl.includes('pay.hotmart') || destinationUrl.includes('pay.kiwify')) {
+              var sckValue = utmSource + '-' + utmMedium + '-' + utmCampaign + '-' + utmContent + '-' + utmTerm;
+              destinationUrl += '&sck=' + sckValue;
+            }
+            links[i].href = destinationUrl;
+          }
+        }
+      }
+    }
+  </script>
 </body>
 
 </html>
