@@ -274,8 +274,9 @@
 
     .hero-eyebrow {
       display: inline-block;
-      background: var(--color-accent);
-      color: var(--color-white);
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--color-ink-mid);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       font-family: var(--font-body);
       font-weight: 700;
       font-size: 0.8rem;
@@ -673,35 +674,6 @@
           <p class="hero-sub">
             20 minutos por dia, 21 dias, pra parar de enterrar o que Deus te deu e começar a multiplicar.
           </p>
-          <div class="hero-cta-wrap">
-            <a href="https://pay.hotmart.com/W105539649V?checkoutMode=10" class="btn btn--lg" target="_blank"
-              rel="noopener">
-              Quero começar o desafio
-            </a>
-            <div class="trust-row" style="justify-content: flex-start;">
-              <span>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                  aria-hidden="true">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                </svg>
-                Hotmart
-              </span>
-              <span>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                  aria-hidden="true">
-                  <polyline points="20 6 9 17 4 12" />
-                </svg>
-                7 dias de garantia
-              </span>
-              <span>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                  aria-hidden="true">
-                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-                </svg>
-                Acesso hoje
-              </span>
-            </div>
-          </div>
         </div>
 
         <!-- Mockup celular -->
@@ -799,7 +771,7 @@
           style="font-family:var(--font-body);font-weight:400;font-size:clamp(1rem,2.2vw,1.25rem);line-height:1.5;display:block;margin-top:1rem;color:rgba(255,255,255,0.8);">Procrastinei
           27 anos antes de descobrir que o problema nunca foi preguiça. Era medo disfarçado de fé. Larguei mais de 20
           anos de CLT, fiz uma promessa diante de Deus e criei o Método Remiyah, que já tirou <strong
-            style="color:#FF6B00;font-weight:600;">105 pessoas</strong> exatamente desse lugar.<br><br><strong
+            style="color:#FF6B00;font-weight:600;"><span class="count-up" data-target="216">216</span> pessoas</strong> exatamente desse lugar.<br><br><strong
             style="color:#FFFFFF;font-weight:600;">Eu não vou te mandar versículo motivacional. Vou
             te mandar uma missão por dia.</strong></span>
       </h2>
@@ -1547,6 +1519,41 @@
       );
 
       document.querySelectorAll('.fade-up').forEach((el) => observer.observe(el));
+    })();
+
+    // ─── Count-up no scroll ─────────────────────────────────────
+    (function () {
+      const els = document.querySelectorAll('.count-up');
+      if (!els.length) return;
+      const motionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!motionOK) return;
+
+      const run = (el) => {
+        const target = parseInt(el.dataset.target, 10) || 0;
+        const duration = 1600;
+        let start = null;
+        const step = (ts) => {
+          if (!start) start = ts;
+          const p = Math.min((ts - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = Math.round(eased * target);
+          if (p < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+      };
+
+      const obs = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              run(entry.target);
+              obs.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.6 }
+      );
+      els.forEach((el) => obs.observe(el));
     })();
 
     // ─── FAQ Accordion ──────────────────────────────────────────
