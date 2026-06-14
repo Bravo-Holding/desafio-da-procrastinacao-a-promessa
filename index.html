@@ -1576,20 +1576,24 @@
       });
     });
 
-    // ─── Sticky bar — aparecer após scroll ─────────────────────
+    // ─── Sticky bar — aparecer após ver "medo travestido de espiritualidade" ─────────────────────
     (function () {
       const bar = document.querySelector('.sticky-bar');
-      if (!bar) return;
+      const trigger = document.querySelector('.problema-h1-p2');
+      if (!bar || !trigger) return;
 
-      let shown = false;
-      const onScroll = () => {
-        if (!shown && window.scrollY > 400) {
-          bar.classList.add('show');
-          shown = true;
-          window.removeEventListener('scroll', onScroll);
-        }
-      };
-      window.addEventListener('scroll', onScroll, { passive: true });
+      const obs = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              bar.classList.add('show');
+              obs.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.8 }
+      );
+      obs.observe(trigger);
     })();
 
     // ─── Smooth scroll ──────────────────────────────────────────
