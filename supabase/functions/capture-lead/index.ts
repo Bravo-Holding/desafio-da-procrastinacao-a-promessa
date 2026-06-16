@@ -101,6 +101,7 @@ Deno.serve(async (req: Request) => {
       ph: [await sha256(phone)],
       fn: firstName ? [await sha256(firstName)] : undefined,
       ln: lastName ? [await sha256(lastName)] : undefined,
+      external_id: [await sha256(email)],
       client_user_agent: userAgent || undefined,
     };
     if (ip) user_data.client_ip_address = ip;

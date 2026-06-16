@@ -1814,7 +1814,7 @@
 
         // 1. Pixel Lead com Advanced Matching (o fbq hasheia os valores crus)
         if (window.fbq) {
-          fbq('init', PIXEL_ID, { em: email, ph: phone, fn: firstName, ln: lastName });
+          fbq('init', PIXEL_ID, { em: email, ph: phone, fn: firstName, ln: lastName, external_id: email });
           fbq('track', 'Lead', { value: VALUE, currency: CURRENCY }, { eventID: eventId });
         }
 
