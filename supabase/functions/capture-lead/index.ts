@@ -65,6 +65,13 @@ Deno.serve(async (req: Request) => {
     || req.headers.get('cf-connecting-ip') || '';
   const eventSourceUrl = String(body.event_source_url || '');
 
+  // Consentimento: três estados. Ausente vira null ("não foi perguntado"), não false.
+  // NÃO rejeitamos lead sem consentimento aqui de propósito: o bloqueio já existe no
+  // front, e o braço v4 do teste A/B não tem o checkbox. Validar no servidor derrubaria
+  // 100% dos leads do controle no instante em que esta versão subisse.
+  const consent = typeof body.consent === 'boolean' ? body.consent : null;
+  const consentText = body.consent_text ? String(body.consent_text) : null;
+
   // ---- 1. grava o lead (service_role bypassa RLS) ----
   const supabase = createClient(
     Deno.env.get('SUPABASE_URL')!,
@@ -88,6 +95,9 @@ Deno.serve(async (req: Request) => {
     event_id: eventId,
     user_agent: userAgent,
     ip,
+    consent,
+    consent_text: consentText,
+    consent_at: consent === true ? new Date().toISOString() : null,
   });
   if (dbError) console.error('db insert error:', dbError.message);
 
