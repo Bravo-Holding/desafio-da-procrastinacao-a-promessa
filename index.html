@@ -30,7 +30,7 @@
   <link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png">
   <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
   <link rel="manifest" href="favicon/site.webmanifest">
-  <meta name="theme-color" content="#E8420A">
+  <meta name="theme-color" content="#0A0907">
   <!-- Facebook -->
   <meta name="facebook-domain-verification" content="x3mdskvask209m6cuxpnd6964lbzp1" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -48,24 +48,52 @@
   </noscript>
   <style>
     /* ============================================================
-       DESIGN SYSTEM — Creme Brutalist Quente
-       Conceito: cartaz de campanha. Urgente, direto, impactante.
-       Oposto total ao dark mode v1.
+       DESIGN SYSTEM — Cartaz de Guerra
+       Conceito: cartaz de campanha em serigrafia sobre parede suja.
+       Preto quente (matiz 40), vermelho de sangue seco, creme de papel velho.
+       Ver identidade-visual.md.
     ============================================================ */
     :root {
-      --color-bg: #F5F0E8;
-      --color-bg-alt: #EDE7D9;
-      --color-ink: #111111;
-      --color-ink-mid: #444444;
-      --color-ink-muted: #777777;
-      --color-accent: #E8420A;
-      --color-accent-h: #C93508;
-      --color-gold: #D4840A;
+      /* paleta raiz — Cartaz de Guerra */
+      --void: #0A0907;
+      --pitch: #131110;
+      --ash: #1C1815;
+      --iron: #2A2421;
+
+      --blood: #A61312;
+      --blood-deep: #6E0F0E;
+      --blood-hot: #C4181A;
+      --signal: #E0392A;
+      --scab: #2A0A09;
+
+      --bone-hi: #EFE4D8;
+      --bone: #D7C4B4;
+      --bone-mute: #9C8D82;
+      --bone-low: #857870;
+      --bone-dim: #6B6058;
+
+      /* legado repontado para a paleta nova (nomes preservados: ~120 referências) */
+      --color-bg: var(--void);
+      --color-bg-alt: var(--ash);
+      --color-surface: var(--pitch);
+      --color-ink: var(--bone);
+      /* --color-ink agora é SÓ texto, nunca fundo */
+      --color-ink-mid: var(--bone-mute);
+      /* --bone-mute, NÃO --bone-low. Este token é global e pode cair em qualquer
+         superfície; --bone-low foi calibrado só contra --void (4,66:1) e despenca a
+         partir do --ash (4,13:1). Mesmo erro que --signal tinha. --bone-low segue
+         válido apenas onde o fundo é comprovadamente --void (ex: .footer-links). */
+      --color-ink-muted: var(--bone-mute);
+      --color-accent: var(--blood);
+      --color-accent-h: var(--blood-hot);
+      --color-accent-tx: var(--signal);
+      /* vermelho de TEXTO sobre escuro */
+      --color-strike: var(--bone-dim);
       --color-white: #FFFFFF;
+      /* mockup WhatsApp: cores do app real, não tocar */
       --color-wa-green: #25D366;
       --color-wa-bg: #ECE5DD;
       --color-wa-bubble: #FFFFFF;
-      --color-strike: #888888;
 
       --font-display: 'Bebas Neue', sans-serif;
       --font-body: 'Source Sans 3', sans-serif;
@@ -77,12 +105,14 @@
       --space-xl: 6rem;
       --space-2xl: 10rem;
 
-      --radius-sm: 8px;
-      --radius-md: 16px;
-      --radius-lg: 24px;
+      /* Canto reto: cartaz colado em muro não tem borda arredondada.
+         Teto de 4px em todo o sistema. Ver identidade-visual.md §6.2. */
+      --radius-sm: 2px;
+      --radius-md: 3px;
+      --radius-lg: 4px;
 
-      --shadow-card: 0 2px 16px rgba(0, 0, 0, 0.10);
-      --shadow-wa: 0 4px 24px rgba(0, 0, 0, 0.13);
+      --shadow-card: 0 2px 16px rgba(0, 0, 0, 0.5);
+      --shadow-wa: 0 4px 24px rgba(0, 0, 0, 0.5);
 
       --transition: 200ms ease;
     }
@@ -106,6 +136,24 @@
       font-size: 18px;
       line-height: 1.65;
       overflow-x: hidden;
+    }
+
+    /* Títulos e números grandes = nível alto da hierarquia. Corpo fica em --bone. */
+    h1,
+    h2,
+    h3 {
+      color: var(--bone-hi);
+    }
+
+    /* Foco visível fica no CRÍTICO de propósito, contra a regra geral de manter o
+       não-essencial no style.css: o style.css carrega com media="print" onload, e quem
+       tecla Tab antes disso navegaria sem nenhuma indicação. Acessibilidade de teclado
+       não pode depender de CSS assíncrono. O override de papel/modal segue no style.css.
+       --signal sobre a rampa de escuros: pior caso 3,49:1 sobre --iron, acima do
+       mínimo de 3:1 do WCAG 1.4.11. */
+    :is(a, button, input, select, textarea, summary, [tabindex], [role="button"]):focus-visible {
+      outline: 3px solid var(--signal);
+      outline-offset: 2px;
     }
 
     /* ============================================================
@@ -132,8 +180,10 @@
       padding-block: var(--space-xl);
     }
 
+    /* Vermelho é bloco, não é letra: --blood reprova AA (2,6:1) como texto.
+       Texto vermelho sobre escuro usa sempre --signal. Ver identidade-visual.md §3. */
     .text-accent {
-      color: var(--color-accent);
+      color: var(--color-accent-tx);
     }
 
     .text-muted {
@@ -245,17 +295,8 @@
       overflow: hidden;
     }
 
-    #hero::before {
-      content: '';
-      position: absolute;
-      top: -80px;
-      right: -120px;
-      width: 500px;
-      height: 500px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(232, 66, 10, 0.08) 0%, transparent 70%);
-      pointer-events: none;
-    }
+    /* Glow radial laranja removido: gradiente é proibido na identidade (serigrafia
+       não tem gradiente) e o laranja está aposentado. O ::before era só o glow. */
 
     .hero-inner {
       display: grid;
@@ -283,7 +324,11 @@
       letter-spacing: 0.12em;
       text-transform: uppercase;
       padding: 0.35rem 0.85rem;
-      border-radius: 4px;
+      /* Carimbo: canto reto + rotação leve. Ângulo próprio (não repetir o dos
+         outros selos) pra ler como carimbo, não como erro de CSS. §6.2 e §6.3. */
+      border-radius: 0;
+      transform: rotate(-0.5deg);
+      transform-origin: left center;
       margin-bottom: 1rem;
     }
 
@@ -292,7 +337,7 @@
       font-size: clamp(3.5rem, 9vw, 6.5rem);
       line-height: 0.92;
       letter-spacing: 0.01em;
-      color: var(--color-ink);
+      color: var(--bone-hi);
       display: block;
     }
 
@@ -759,10 +804,10 @@
                     aria-label="Mensagem da primeira missão do dia 1: a parábola dos talentos não fala sobre esperar, fala sobre enterrar por medo. Tarefa de hoje, 15 minutos: escreva as 3 coisas que você adia há mais de 6 meses usando a desculpa do tempo de Deus. Escolha 1; amanhã ela vira seu projeto dos 21 dias. Responda este áudio com a sua escolha.">
                     <strong>&#9989; Sua primeira missão:</strong><br>
                     &bull; A parábola dos talentos não fala sobre esperar, fala sobre <strong
-                      style="color:#FF6B00">enterrar por medo</strong>.<br>
+                      style="color:var(--blood)">enterrar por medo</strong>.<br>
                     &bull; <strong>Tarefa de hoje (15 min):</strong> escreva as 3 coisas que você adia há mais de 6
-                    meses usando a desculpa do <strong style="color:#FF6B00">"tempo de Deus"</strong>.<br>
-                    &bull; Escolha 1. Amanhã ela vira seu <strong style="color:#FF6B00">projeto dos 21
+                    meses usando a desculpa do <strong style="color:var(--blood)">"tempo de Deus"</strong>.<br>
+                    &bull; Escolha 1. Amanhã ela vira seu <strong style="color:var(--blood)">projeto dos 21
                       dias</strong>.<br>
                     &bull; Responda este áudio com a sua escolha. &#9997;&#65039;
                     <div class="wa-bubble-meta" aria-hidden="true">
@@ -794,13 +839,13 @@
     <div class="container">
       <h2 class="prova-rapida-title fade-up">
         <span
-          style="font-family:var(--font-body);font-weight:600;font-size:clamp(0.85rem,1.8vw,1rem);letter-spacing:0.08em;text-transform:uppercase;display:block;margin-bottom:0.75rem;color:#FF6B00;">Quem
+          style="font-family:var(--font-body);font-weight:600;font-size:clamp(0.85rem,1.8vw,1rem);letter-spacing:0.08em;text-transform:uppercase;display:block;margin-bottom:0.75rem;color:var(--bone-hi);">Quem
           vai estar no seu WhatsApp todo dia</span>
         <span class="text-accent">Eu sou Ewertton Bravo.</span><br><span
           style="font-family:var(--font-body);font-weight:400;font-size:clamp(1rem,2.2vw,1.25rem);line-height:1.5;display:block;margin-top:1rem;color:rgba(255,255,255,0.8);">Procrastinei
           27 anos antes de descobrir que o problema nunca foi preguiça. Era medo disfarçado de fé. Larguei mais de 20
           anos de CLT, fiz uma promessa diante de Deus e criei o Método Remiyah, que já tirou <strong
-            style="color:#FF6B00;font-weight:600;"><span class="count-up" data-target="216">216</span> pessoas</strong> exatamente desse lugar.<br><br><strong
+            style="color:var(--bone-hi);font-weight:600;"><span class="count-up" data-target="216">216</span> pessoas</strong> exatamente desse lugar.<br><br><strong
             style="color:#FFFFFF;font-weight:600;">Eu não vou te mandar versículo motivacional. Vou
             te mandar uma missão por dia.</strong></span>
       </h2>
@@ -921,7 +966,7 @@
   <!-- ============================================================
      SECTION 5 — MURAL DE PRINTS
 ============================================================ -->
-  <section id="mural" class="section--xl">
+  <section id="mural" class="section--xl section--paper">
     <div class="container">
       <h2 class="mural-title fade-up">Eles duvidaram também.<br><span class="text-accent">Depois enviaram isso.</span>
       </h2>
@@ -1006,7 +1051,7 @@
 
         <div class="entregavel-card fade-up" style="transition-delay:0.05s">
           <svg class="entregavel-icon" viewBox="0 0 44 44" fill="none" aria-hidden="true">
-            <circle cx="22" cy="22" r="22" fill="rgba(232,66,10,0.12)" />
+            <circle cx="22" cy="22" r="22" style="fill:rgba(166,19,18,0.25)" />
             <path d="M22 12a3 3 0 00-3 3v7a3 3 0 006 0v-7a3 3 0 00-3-3z" stroke="currentColor" stroke-width="2"
               stroke-linecap="round" />
             <path d="M30 22v1a8 8 0 01-16 0v-1M22 31v3M18 34h8" stroke="currentColor" stroke-width="2"
@@ -1020,7 +1065,7 @@
 
         <div class="entregavel-card fade-up" style="transition-delay:0.10s">
           <svg class="entregavel-icon" viewBox="0 0 44 44" fill="none" aria-hidden="true">
-            <circle cx="22" cy="22" r="22" fill="rgba(232,66,10,0.12)" />
+            <circle cx="22" cy="22" r="22" style="fill:rgba(166,19,18,0.25)" />
             <rect x="13" y="12" width="18" height="20" rx="3" stroke="currentColor" stroke-width="2" />
             <path d="M17 18h10M17 22h10M17 26h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
           </svg>
@@ -1033,7 +1078,7 @@
 
         <div class="entregavel-card fade-up" style="transition-delay:0.15s">
           <svg class="entregavel-icon" viewBox="0 0 44 44" fill="none" aria-hidden="true">
-            <circle cx="22" cy="22" r="22" fill="rgba(232,66,10,0.12)" />
+            <circle cx="22" cy="22" r="22" style="fill:rgba(166,19,18,0.25)" />
             <path d="M16 22l4 4 8-8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
               stroke-linejoin="round" />
             <rect x="12" y="12" width="20" height="20" rx="4" stroke="currentColor" stroke-width="2" />
@@ -1047,7 +1092,7 @@
 
         <div class="entregavel-card fade-up" style="transition-delay:0.20s">
           <svg class="entregavel-icon" viewBox="0 0 44 44" fill="none" aria-hidden="true">
-            <circle cx="22" cy="22" r="22" fill="rgba(232,66,10,0.12)" />
+            <circle cx="22" cy="22" r="22" style="fill:rgba(166,19,18,0.25)" />
             <path
               d="M22 14c-4.42 0-8 3.58-8 8 0 1.41.37 2.73 1.01 3.88L14 30l4.12-1.01A7.95 7.95 0 0022 30c4.42 0 8-3.58 8-8s-3.58-8-8-8z"
               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -1060,16 +1105,20 @@
         </div>
 
         <div class="entregavel-card fade-up" style="transition-delay:0.25s">
-          <span class="bonus-tag">Bônus &middot; R$ 497</span>
           <div>
             <svg class="entregavel-icon" viewBox="0 0 44 44" fill="none" aria-hidden="true"
               style="width:36px;height:36px;margin-bottom:0.5rem">
-              <circle cx="22" cy="22" r="22" fill="rgba(212,132,10,0.15)" />
-              <path d="M22 12c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" stroke="#D4840A" stroke-width="2" />
-              <path d="M22 20c-4.42 0-8 1.79-8 4v2h16v-2c0-2.21-3.58-4-8-4z" stroke="#D4840A" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round" />
+              <circle cx="22" cy="22" r="22" style="fill:rgba(166,19,18,0.25)" />
+              <path d="M22 12c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"
+                style="stroke:var(--color-accent-tx)" stroke-width="2" />
+              <path d="M22 20c-4.42 0-8 1.79-8 4v2h16v-2c0-2.21-3.58-4-8-4z" style="stroke:var(--color-accent-tx)"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
-            <div class="entregavel-title" style="color:#D4840A">Bônus: 2 aulas + Sessão 1:1</div>
+            <!-- Selo movido pra dentro do bloco de texto: como filho direto do .entregavel-card
+                 (display:flex) ele virava item de flex ao lado do ícone e quebrava em 3 linhas.
+                 O CSS do .bonus-tag (inline-block + margin-bottom) já era escrito pra este lugar. -->
+            <span class="bonus-tag">Bônus &middot; R$ 497</span>
+            <div class="entregavel-title">Bônus: 2 aulas + Sessão 1:1</div>
             <p class="entregavel-desc">Duas aulas bônus: "O que são projetos" (semana 1) e "Google Tasks + Agenda +
               Drive" (semana 2). Mais uma sessão 1:1 de 30 minutos comigo pra quem completa os 21 dias e envia o
               progresso.</p>
@@ -1141,35 +1190,35 @@
           <div class="ad-col-label">Depois</div>
           <ul class="ad-list" aria-label="Como é depois do desafio">
             <li>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E8420A" stroke-width="2.5"
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="stroke:var(--color-accent-tx)" stroke-width="2.5"
                 aria-hidden="true">
                 <polyline points="20 6 9 17 4 12" />
               </svg>
               1 próxima ação clara, só isso
             </li>
             <li>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E8420A" stroke-width="2.5"
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="stroke:var(--color-accent-tx)" stroke-width="2.5"
                 aria-hidden="true">
                 <polyline points="20 6 9 17 4 12" />
               </svg>
               Paz de quem entregou o que prometeu, diante de Deus e de si mesmo
             </li>
             <li>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E8420A" stroke-width="2.5"
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="stroke:var(--color-accent-tx)" stroke-width="2.5"
                 aria-hidden="true">
                 <polyline points="20 6 9 17 4 12" />
               </svg>
               Hora marcada pro que importa, inclusive pro tempo com Deus
             </li>
             <li>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E8420A" stroke-width="2.5"
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="stroke:var(--color-accent-tx)" stroke-width="2.5"
                 aria-hidden="true">
                 <polyline points="20 6 9 17 4 12" />
               </svg>
               Voltar a orar sem peso, porque agora você está caminhando
             </li>
             <li>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E8420A" stroke-width="2.5"
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="stroke:var(--color-accent-tx)" stroke-width="2.5"
                 aria-hidden="true">
                 <polyline points="20 6 9 17 4 12" />
               </svg>
@@ -1184,7 +1233,7 @@
   <!-- ============================================================
      SECTION 8 — OFERTA + CTA PRINCIPAL
 ============================================================ -->
-  <section id="oferta" class="section--xl">
+  <section id="oferta" class="section--xl section--paper">
     <div class="container">
       <h2 class="oferta-headline fade-up">Quanto vale<br><span class="text-accent">Multiplicar um talento?</span></h2>
       <p class="oferta-sub fade-up">O preço sobe quando encerrar esse lançamento. Sem data certa. Quando fechar, fecha.
@@ -1313,13 +1362,13 @@
       <div class="garantia-shield fade-up" aria-hidden="true">
         <svg viewBox="0 0 120 140" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"
           aria-label="Escudo de garantia 7 dias">
-          <path d="M60 4L8 28v36c0 33.1 22.1 64.1 52 72 29.9-7.9 52-38.9 52-72V28L60 4z" fill="rgba(232,66,10,0.12)"
-            stroke="#E8420A" stroke-width="3" />
+          <path d="M60 4L8 28v36c0 33.1 22.1 64.1 52 72 29.9-7.9 52-38.9 52-72V28L60 4z"
+            style="fill:rgba(166,19,18,0.25);stroke:var(--color-accent-tx)" stroke-width="3" />
           <text x="60" y="62" text-anchor="middle" font-family="'Bebas Neue', sans-serif" font-size="22" fill="white"
             font-weight="700">7</text>
           <text x="60" y="80" text-anchor="middle" font-family="'Bebas Neue', sans-serif" font-size="11"
             fill="rgba(255,255,255,0.7)" letter-spacing="3">DIAS</text>
-          <path d="M44 95l10 10 22-22" stroke="#E8420A" stroke-width="3.5" stroke-linecap="round"
+          <path d="M44 95l10 10 22-22" style="stroke:var(--color-accent-tx)" stroke-width="3.5" stroke-linecap="round"
             stroke-linejoin="round" />
         </svg>
       </div>

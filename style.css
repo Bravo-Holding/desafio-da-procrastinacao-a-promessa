@@ -1,9 +1,74 @@
 /* ============================================================
+   FOCO VISÍVEL (WCAG 2.4.7 / 1.4.11)
+   Antes disto a página tinha exatamente UM outline declarado, e era
+   `.lead-field input:focus { outline: none }`. Quem navega por teclado não
+   enxergava onde estava — sobre --void, invisível é invisível.
+
+   :focus-visible, não :focus — clique de mouse não desenha contorno.
+
+   Cor: --signal (#E0392A) sobre a rampa de escuros. Pior caso é sobre --iron
+   (3,49:1), acima do mínimo de 3:1 de 1.4.11. Sobre papel --signal cai pra 3,50:1
+   e o vizinho é sempre creme claro, então lá o contorno vira --blood (6,15:1
+   contra #EFE4D8, 7,71:1 contra o branco do campo).
+
+   Especificidade é deliberada: o override de papel/modal usa :is() aninhado (0,3,0)
+   pra ganhar de `.lead-field input:focus { outline:none }` (0,2,1). A regra global
+   (0,2,0) perde dessa e por isso NÃO cobre o campo do modal sozinha.
+============================================================ */
+:is(a, button, input, select, textarea, summary, [tabindex], [role="button"]):focus-visible {
+  outline: 3px solid var(--signal);
+  outline-offset: 2px;
+}
+
+:is(.section--paper, .lead-modal__card) :is(a, button, input, select, textarea, summary, [tabindex], [role="button"]):focus-visible {
+  outline: 3px solid var(--blood);
+  outline-offset: 2px;
+}
+
+/* ============================================================
+   UTILITÁRIO — SEÇÃO EM PAPEL (inversão de escopo)
+   Único contexto de inversão permitido pelo sistema: fundo --bone, texto --void.
+   Não reescreve descendente nenhum. Redefine os tokens no escopo da seção e tudo
+   que já referencia token vira claro sozinho. Ver identidade-visual.md §8.
+   --bone-hi vira --void porque h1,h2,h3 apontam pra ele no CSS crítico.
+   --color-accent-tx vira --blood porque --signal sobre papel dá 2,6:1 e reprova.
+
+   O .lead-modal__card entra no mesmo grupo (não duplica os tokens): quem clica no
+   botão de compra sai do escuro e cai no papel, o modal lê como continuação do card
+   de preço. Cada seletor mantém seu próprio background.
+
+   ATENÇÃO ao escrever aqui: este bloco SOMBREIA --bone-hi e --iron. Qualquer token
+   novo que aponte pra um deles com var() resolve pelo valor LOCAL, não pelo :root.
+   Foi assim que --color-bg-alt virou preto (#0A0907) dentro do papel. Token que
+   precisa do valor claro entra como HEX LITERAL.
+============================================================ */
+.section--paper,
+.lead-modal__card {
+  --color-bg: var(--bone);
+  --color-bg-alt: #EFE4D8;
+  /* literal: var(--bone-hi) resolveria pro --void sombreado logo abaixo */
+  --color-surface: #FFFFFF;
+  --color-ink: var(--void);
+  --color-ink-mid: #4A413A;
+  --color-ink-muted: #5C524A;
+  --color-accent-tx: var(--blood);
+  --bone-hi: var(--void);
+  --iron: #BCA795;
+  /* Borda de CAMPO DE FORMULÁRIO, separada da hairline decorativa do --iron.
+     O campo é branco sobre card creme (1,25:1), então a borda é o único identificador
+     do controle e o WCAG 1.4.11 exige 3:1. --iron aqui vale #BCA795 e dá só 2,31:1.
+     Este tom passa dos dois lados: 4,18:1 no branco do campo, 3,34:1 no card. */
+  --field-line: #8A7969;
+  background: var(--color-bg);
+  color: var(--color-ink);
+}
+
+/* ============================================================
    SECTION 2 — PROVA RÁPIDA
 ============================================================ */
 #prova-rapida {
-  background: var(--color-ink);
-  color: var(--color-white);
+  background: var(--pitch);
+  color: var(--bone);
 }
 
 .prova-rapida-title {
@@ -40,17 +105,19 @@
   padding: 1.25rem;
 }
 
+/* 14,4px: abaixo do limiar de display do --signal. Vermelho aqui seria texto pequeno,
+   e ainda seria o segundo campo vermelho da dobra. Ver identidade-visual.md §3 e §4. */
 .prova-card-name {
   font-weight: 700;
   font-size: 0.9rem;
   margin-bottom: 0.5rem;
-  color: var(--color-accent);
+  color: var(--bone-hi);
 }
 
 .prova-card-text {
   font-size: 0.9rem;
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.85);
+  color: var(--bone);
 }
 
 .prova-card-emoji {
@@ -62,7 +129,7 @@
   text-align: center;
   margin-top: 2.5rem;
   font-size: 1.1rem;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--bone-mute);
   font-style: italic;
 }
 
@@ -122,21 +189,21 @@
 }
 
 .vs-table th.col-vs {
-  background: var(--color-ink);
-  color: var(--color-white);
+  background: var(--iron);
+  color: var(--bone);
   font-size: 0.9rem;
   letter-spacing: 0.1em;
 }
 
 .vs-table th.col-after {
-  color: var(--color-accent);
+  color: var(--color-accent-tx);
   background: var(--color-bg-alt);
   border-radius: 0 var(--radius-sm) 0 0;
 }
 
 .vs-table td {
   padding: 0.65rem 1rem;
-  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  border-top: 1px solid var(--iron);
   text-align: center;
 }
 
@@ -146,8 +213,8 @@
 }
 
 .vs-table td.col-vs {
-  background: var(--color-ink);
-  color: rgba(255, 255, 255, 0.4);
+  background: var(--iron);
+  color: var(--bone-mute);
   font-size: 0.75rem;
   letter-spacing: 0.1em;
   font-weight: 600;
@@ -202,7 +269,7 @@
 }
 
 .fase-card {
-  background: var(--color-bg);
+  background: var(--iron);
   border-radius: var(--radius-md);
   padding: 1.75rem 1.5rem;
   border-left: 4px solid var(--color-accent);
@@ -213,15 +280,17 @@
   font-family: var(--font-display);
   font-size: 4rem;
   line-height: 1;
-  color: rgba(232, 66, 10, 0.15);
+  color: var(--blood-deep);
   margin-bottom: 0.25rem;
 }
 
+/* 20,8px sobre --iron: --signal daria 3,49:1 e reprova em texto pequeno.
+   O vermelho do card já existe como bloco no border-left. Texto vai pra creme. */
 .fase-label {
   font-family: var(--font-display);
   font-size: 1.3rem;
   letter-spacing: 0.04em;
-  color: var(--color-accent);
+  color: var(--bone-hi);
   margin-bottom: 0.75rem;
 }
 
@@ -249,10 +318,7 @@
 /* ============================================================
    SECTION 5 — MURAL DE PRINTS
 ============================================================ */
-#mural {
-  background: var(--color-bg);
-}
-
+/* fundo e cor vêm de .section--paper no <section> (sem regra de ID pra não brigar). */
 .mural-title {
   font-family: var(--font-display);
   font-size: clamp(2rem, 5vw, 3.8rem);
@@ -282,9 +348,11 @@
 }
 
 /* WhatsApp print card */
+/* Sobre papel, #e5e5ea some: 1,01:1 contra o próprio print (#ECE5DD) e 1,34:1 contra o
+   fundo. --iron no escopo do papel vale #BCA795 e dá 1,85:1 / 1,37:1 — hairline que existe. */
 .wa-print {
   background: white;
-  border: 1px solid #e5e5ea;
+  border: 1px solid var(--iron);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-wa);
   overflow: hidden;
@@ -307,7 +375,7 @@
 
 .wa-print:hover {
   transform: rotate(0deg) translateY(-4px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.55);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
@@ -342,7 +410,7 @@
   font-family: var(--font-display);
   font-size: 2rem;
   letter-spacing: 0.02em;
-  color: var(--color-accent);
+  color: var(--color-accent-tx);
 }
 
 .mural-hook {
@@ -357,8 +425,8 @@
    SECTION 6 — ENTREGÁVEIS
 ============================================================ */
 #entregaveis {
-  background: var(--color-ink);
-  color: var(--color-white);
+  background: var(--color-bg);
+  color: var(--bone);
 }
 
 .entregaveis-headline {
@@ -401,32 +469,37 @@
   width: 44px;
   height: 44px;
   flex-shrink: 0;
-  color: var(--color-accent);
+  color: var(--color-accent-tx);
 }
 
 .entregavel-title {
   font-weight: 700;
   font-size: 1rem;
   margin-bottom: 0.4rem;
-  color: white;
+  color: var(--bone);
 }
 
 .entregavel-desc {
   font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--bone-mute);
   line-height: 1.6;
 }
 
+/* Selo carimbado: bloco --blood com texto branco (7,7:1). É o gesto-assinatura do cartaz
+   e mantém o sistema em três cores. Ver identidade-visual.md §5. */
 .bonus-tag {
   display: inline-block;
-  background: var(--color-gold);
-  color: white;
+  background: var(--blood);
+  color: var(--color-white);
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   padding: 0.2rem 0.6rem;
-  border-radius: 4px;
+  /* Carimbo torto: canto reto + rotação. Ver identidade-visual.md §6.2 e §6.3. */
+  border-radius: 0;
+  transform: rotate(-1.5deg);
+  transform-origin: left center;
   margin-bottom: 0.5rem;
 }
 
@@ -472,13 +545,13 @@
 }
 
 .ad-col--before {
-  background: #E8E0D5;
-  border: 2px solid rgba(0, 0, 0, 0.08);
+  background: var(--pitch);
+  border: 2px solid var(--iron);
 }
 
 .ad-col--after {
-  background: var(--color-ink);
-  color: var(--color-white);
+  background: var(--iron);
+  color: var(--bone);
 }
 
 .ad-col-label {
@@ -493,7 +566,7 @@
 }
 
 .ad-col--after .ad-col-label {
-  color: var(--color-accent);
+  color: var(--color-accent-tx);
 }
 
 .ad-list {
@@ -519,10 +592,7 @@
 /* ============================================================
    SECTION 8 — OFERTA + CTA PRINCIPAL
 ============================================================ */
-#oferta {
-  background: var(--color-bg);
-}
-
+/* fundo e cor vêm de .section--paper no <section> (sem regra de ID pra não brigar). */
 .oferta-headline {
   font-family: var(--font-display);
   font-size: clamp(2.5rem, 6vw, 5rem);
@@ -547,7 +617,7 @@
   padding: 2.5rem 2rem;
   max-width: 520px;
   margin-inline: auto;
-  box-shadow: 0 8px 40px rgba(232, 66, 10, 0.12);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
   text-align: center;
 }
 
@@ -560,7 +630,9 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   padding: 0.3rem 0.9rem;
-  border-radius: 4px;
+  /* Carimbo torto. Ângulo diferente do .bonus-tag de propósito. §6.2 e §6.3. */
+  border-radius: 0;
+  transform: rotate(-1deg);
   margin-bottom: 1.5rem;
 }
 
@@ -615,7 +687,7 @@
    SECTION 9 — QUEM É EWERTTON
 ============================================================ */
 #ewertton {
-  background: var(--color-bg-alt);
+  background: var(--pitch);
 }
 
 .ewertton-inner {
@@ -634,10 +706,14 @@
 .ewertton-photo {
   width: 220px;
   height: 220px;
+  /* DESVIO CONSCIENTE da §6.2 (canto reto), pendente de asset.
+     `ewertton-preto.jpg` é 256x256 com recorte circular sobre fundo BRANCO: não existe
+     conteúdo nos cantos. Com canto reto os 4 cantos brancos aparecem sobre o escuro.
+     Volta a circular até chegar foto retangular sem máscara (ver PENDÊNCIAS no CLAUDE.md). */
   border-radius: 50%;
   overflow: hidden;
   background: var(--color-bg);
-  border: 3px solid var(--color-accent);
+  border: 3px solid var(--iron);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -668,11 +744,13 @@
   margin-bottom: 1.25rem;
 }
 
+/* Vermelho é bloco, não é letra: a cor sai do texto e fica só no border-left, que é
+   onde ela pertence. Os 24px ficam por composição, não mais por contraste. */
 .ewertton-quote {
   font-family: 'Source Sans 3', sans-serif;
   font-style: italic;
-  font-size: 1.3rem;
-  color: var(--color-accent);
+  font-size: 1.5rem;
+  color: var(--bone-hi);
   border-left: 3px solid var(--color-accent);
   padding-left: 1rem;
   margin-bottom: 1rem;
@@ -690,8 +768,8 @@
    SECTION 11 — GARANTIA
 ============================================================ */
 #garantia {
-  background: var(--color-ink);
-  color: var(--color-white);
+  background: var(--color-bg-alt);
+  color: var(--bone);
   text-align: center;
 }
 
@@ -712,7 +790,7 @@
 
 .garantia-body {
   font-size: 1.05rem;
-  color: rgba(255, 255, 255, 0.75);
+  color: var(--bone-mute);
   line-height: 1.75;
   max-width: 560px;
   margin-inline: auto;
@@ -726,7 +804,7 @@
    SECTION 12 — FAQ
 ============================================================ */
 #faq {
-  background: var(--color-bg-alt);
+  background: var(--color-bg);
 }
 
 .faq-headline {
@@ -744,10 +822,10 @@
 }
 
 .faq-item {
-  background: var(--color-bg);
+  background: var(--color-surface);
   border-radius: var(--radius-sm);
   overflow: hidden;
-  border: 1px solid rgba(0, 0, 0, 0.07);
+  border: 1px solid var(--iron);
 }
 
 .faq-question {
@@ -768,8 +846,9 @@
   transition: color var(--transition);
 }
 
+/* 15,6px: clarear é a affordance de hover no escuro, e não usa vermelho em texto pequeno. */
 .faq-question:hover {
-  color: var(--color-accent);
+  color: var(--bone-hi);
 }
 
 .faq-chevron {
@@ -777,7 +856,7 @@
   width: 20px;
   height: 20px;
   transition: transform 0.3s ease;
-  color: var(--color-accent);
+  color: var(--color-accent-tx);
 }
 
 .faq-item.open .faq-chevron {
@@ -802,9 +881,11 @@
 /* ============================================================
    SECTION 13 — CTA FINAL
 ============================================================ */
+/* Vermelho fica limitado a ~8% da tela: um campo vermelho inteiro aqui competiria
+   com o CTA verde. --scab é vermelho quase preto e resolve os dois. */
 #cta-final {
-  background: var(--color-accent);
-  color: var(--color-white);
+  background: var(--scab);
+  color: var(--bone);
   text-align: center;
 }
 
@@ -818,7 +899,7 @@
 
 .cta-final-body {
   font-size: 1.1rem;
-  color: rgba(255, 255, 255, 0.85);
+  color: var(--bone);
   margin-bottom: 2rem;
   max-width: 520px;
   margin-inline: auto;
@@ -831,19 +912,19 @@
 
 .btn--invert:hover {
   background: rgba(255, 255, 255, 0.92);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
 }
 
 .trust-row--light {
-  color: rgba(255, 255, 255, 0.75);
+  color: var(--bone-mute);
 }
 
 /* ============================================================
    FOOTER
 ============================================================ */
 footer {
-  background: #0A0A0A;
-  color: rgba(255, 255, 255, 0.5);
+  background: var(--color-bg);
+  color: var(--bone-mute);
   padding: 2rem 0;
   font-size: 0.85rem;
 }
@@ -860,7 +941,7 @@ footer {
   font-family: var(--font-display);
   font-size: 1.4rem;
   letter-spacing: 0.05em;
-  color: white;
+  color: var(--bone);
 }
 
 .footer-links {
@@ -870,13 +951,14 @@ footer {
 }
 
 .footer-links a {
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--bone-low);
   text-decoration: none;
   transition: color var(--transition);
 }
 
+/* --bone-hi, não --bone: o hover precisa clarear em relação ao estado normal. */
 .footer-links a:hover {
-  color: white;
+  color: var(--bone-hi);
 }
 
 /* ============================================================
@@ -887,14 +969,18 @@ footer {
   bottom: 0;
   left: 0;
   right: 0;
-  background: var(--color-ink);
+  background: var(--pitch);
+  /* --pitch sobre --void dá 1,06:1: a barra não tinha separação nenhuma, e a sombra
+     preta sobre fundo preto também não faz nada. A hairline --iron (1,23:1 contra
+     --pitch) é o que desenha a borda da barra. */
+  border-top: 1px solid var(--iron);
   padding: 0.75rem 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
   z-index: 100;
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.6);
   transform: translateY(100%);
   transition: transform 0.4s ease;
 }
@@ -910,7 +996,7 @@ footer {
 }
 
 .sticky-bar-text {
-  color: white;
+  color: var(--bone);
   font-size: 0.85rem;
   line-height: 1.3;
 }
@@ -939,7 +1025,8 @@ footer {
   align-items: center;
   justify-content: center;
   padding: 1rem;
-  background: rgba(17, 17, 17, 0.62);
+  /* véu em --void 85%: a página agora é escura, cinza a 62% não separava mais nada */
+  background: rgba(10, 9, 7, 0.85);
   -webkit-backdrop-filter: blur(2px);
   backdrop-filter: blur(2px);
 }
@@ -948,13 +1035,17 @@ footer {
   display: flex;
 }
 
+/* Os tokens de papel vêm do bloco compartilhado lá em cima. Aqui fica só o que é
+   do card: o papel alto (--bone-hi literal, porque no escopo ele está sombreado)
+   e a mesma borda vermelha da .oferta-box, que amarra os dois como o mesmo objeto. */
 .lead-modal__card {
   position: relative;
   width: 100%;
   max-width: 25rem;
-  background: var(--color-white);
+  background: #EFE4D8;
+  border: 2px solid var(--color-accent);
   border-radius: var(--radius-md);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.28);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.55);
   padding: 1.75rem 1.5rem 1.5rem;
   animation: leadPop 200ms ease;
 }
@@ -978,7 +1069,9 @@ footer {
   cursor: pointer;
   border-radius: 50%;
 }
-.lead-modal__close:hover { background: var(--color-bg-alt); }
+/* --color-bg (--bone #D7C4B4), não --color-bg-alt: depois do fix, --color-bg-alt vale
+   #EFE4D8, a mesma cor do card — o hover existiria e ninguém veria. */
+.lead-modal__close:hover { background: var(--color-bg); }
 
 .lead-modal__title {
   font-family: var(--font-display);
@@ -1010,11 +1103,19 @@ footer {
   font-family: var(--font-body);
   font-size: 1rem;
   padding: 0.8rem 0.9rem;
-  border: 1.5px solid #D8D0C2;
+  border: 1.5px solid var(--field-line);
   border-radius: var(--radius-sm);
-  background: var(--color-bg);
+  /* --color-surface (#FFFFFF), não --color-bg: o campo tem que afundar dentro do
+     papel, e --color-bg no escopo vale --bone, mais escuro que o próprio card. */
+  background: var(--color-surface);
   color: var(--color-ink);
   min-height: 52px;
+}
+
+/* Placeholder: sem regra, o UA entrega ~#A9A9A9 (2,3:1 no branco) e some no papel. */
+.lead-field input::placeholder {
+  color: #7A6E64;
+  opacity: 1;
 }
 
 .lead-field input:focus {
@@ -1024,7 +1125,7 @@ footer {
 }
 
 .lead-field input.is-invalid {
-  border-color: #C93508;
+  border-color: var(--blood);
 }
 
 .lead-phone {
@@ -1038,7 +1139,7 @@ footer {
   font-size: 1rem;
   font-weight: 600;
   color: var(--color-ink-mid);
-  border: 1.5px solid #D8D0C2;
+  border: 1.5px solid var(--field-line);
   border-radius: var(--radius-sm);
   background: var(--color-bg-alt);
   white-space: nowrap;
@@ -1050,8 +1151,11 @@ footer {
   margin-top: 0.5rem;
 }
 
+/* --bone-mute: o verde apagado (#BFD8C6) era o único verde fora do CTA, e o sistema
+   proíbe. O papel desbotado diz "inativo" sem inventar cor. Branco em cima dá 3,2:1
+   (botão é --lg, e controle desabilitado é isento de 1.4.3 de qualquer forma). */
 .lead-modal__submit:disabled {
-  background: #BFD8C6;
+  background: var(--bone-mute);
   box-shadow: none;
   cursor: not-allowed;
   transform: none;
@@ -1062,4 +1166,24 @@ footer {
   font-size: 0.75rem;
   color: var(--color-ink-muted);
   text-align: center;
+}
+
+/* ============================================================
+   GRÃO — textura de papel impresso sobre a página inteira
+   Ver identidade-visual.md §6.1. Ruído gerado por feTurbulence em SVG inline
+   (data-URI): não depende de arquivo novo, que o .cpanel.yml não levaria pro deploy.
+   Camada única, fixa, sem hit-test. z-index 50 fica ABAIXO do .sticky-bar (100)
+   e do .lead-modal (9999) — o grão nunca cobre nem intercepta o checkout.
+   Fica no CSS não-crítico de propósito: é decorativo, não pode inflar o FCP.
+============================================================ */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23g)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 160px 160px;
 }
