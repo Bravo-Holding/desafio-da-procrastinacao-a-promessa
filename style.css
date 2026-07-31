@@ -1024,7 +1024,24 @@ footer {
 }
 
 .lead-field input.is-invalid {
-  border-color: #C93508;
+  border-color: var(--blood, #A61312);
+  border-width: 2px;
+}
+
+/* O erro é TEXTO, não só borda vermelha: cor sozinha não comunica (WCAG 1.4.1) e
+   não chega a leitor de tela. O role="alert" no HTML faz o anúncio.
+   Fallback no var() de propósito: este bloco também é aplicado na v4 (tema creme),
+   que não conhece --blood. Sem o fallback a mensagem herdaria a cor do corpo. */
+.lead-error {
+  margin-top: 0.3rem;
+  font-size: 0.8rem;
+  line-height: 1.35;
+  font-weight: 600;
+  color: var(--blood, #A61312);
+}
+
+.lead-error[hidden] {
+  display: none;
 }
 
 .lead-phone {

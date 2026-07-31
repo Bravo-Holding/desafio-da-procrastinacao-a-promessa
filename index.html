@@ -1707,20 +1707,26 @@
       <form id="lead-form" novalidate>
         <div class="lead-field">
           <label for="lead-name">Nome completo</label>
-          <input type="text" id="lead-name" name="name" autocomplete="name" placeholder="Seu nome completo" required />
+          <input type="text" id="lead-name" name="name" autocomplete="name" placeholder="Seu nome completo" required
+            aria-describedby="lead-name-erro" />
+          <p class="lead-error" id="lead-name-erro" role="alert" hidden></p>
         </div>
         <div class="lead-field">
           <label for="lead-email">E-mail</label>
-          <input type="email" id="lead-email" name="email" autocomplete="email" inputmode="email" placeholder="Insira seu melhor e-mail" required />
+          <input type="email" id="lead-email" name="email" autocomplete="email" inputmode="email" placeholder="Insira seu melhor e-mail" required
+            aria-describedby="lead-email-erro" />
+          <p class="lead-error" id="lead-email-erro" role="alert" hidden></p>
         </div>
         <div class="lead-field">
           <label for="lead-phone">WhatsApp</label>
           <div class="lead-phone">
             <span class="lead-phone__ddi">+55</span>
-            <input type="tel" id="lead-phone" name="phone" autocomplete="tel-national" inputmode="numeric" placeholder="(00) 0 0000 0000" required />
+            <input type="tel" id="lead-phone" name="phone" autocomplete="tel-national" inputmode="numeric" placeholder="(00) 0 0000 0000" required
+              aria-describedby="lead-phone-erro" />
           </div>
+          <p class="lead-error" id="lead-phone-erro" role="alert" hidden></p>
         </div>
-        <button type="submit" class="btn btn--lg lead-modal__submit" id="lead-submit" disabled>
+        <button type="submit" class="btn btn--lg lead-modal__submit" id="lead-submit">
           Quero começar o desafio
         </button>
         <p class="lead-modal__hint">Seus dados ficam seguros. Sem spam.</p>
@@ -1756,17 +1762,46 @@
       function nameOk(v) { return v.trim().split(/\s+/).filter(Boolean).length >= 2; }
       function phoneOk(v) { var d = digits(v); return d.length >= 10 && d.length <= 11; }
 
-      function validate() {
-        var ok = nameOk(elName.value) && emailOk(elEmail.value) && phoneOk(elPhone.value);
-        elSubmit.disabled = !ok;
-        return ok;
+      // Antes daqui o botão só ficava cinza quando algo estava errado, sem dizer o quê.
+      // Quem digitava só o primeiro nome, ou um e-mail sem o final, encarava um botão
+      // morto e ia embora. As regras abaixo são as MESMAS de sempre (mexer nelas
+      // degradaria o match do CAPI); o que mudou é que agora elas falam.
+      var CAMPOS = [
+        { el: elName, ok: nameOk, erro: document.getElementById('lead-name-erro'), msg: 'Digite nome e sobrenome.' },
+        { el: elEmail, ok: emailOk, erro: document.getElementById('lead-email-erro'), msg: 'Confira o e-mail. Precisa ter @ e um final, como .com' },
+        { el: elPhone, ok: phoneOk, erro: document.getElementById('lead-phone-erro'), msg: 'Informe DDD e número, 10 ou 11 dígitos.' }
+      ];
+
+      function mostrarErro(c) {
+        c.el.classList.add('is-invalid');
+        c.el.setAttribute('aria-invalid', 'true');
+        c.erro.textContent = c.msg;
+        c.erro.hidden = false;
       }
-      [elName, elEmail, elPhone].forEach(function (el) {
-        el.addEventListener('input', validate);
+      function limparErro(c) {
+        c.el.classList.remove('is-invalid');
+        c.el.removeAttribute('aria-invalid');
+        c.erro.textContent = '';
+        c.erro.hidden = true;
+      }
+
+      function validate() {
+        return CAMPOS.every(function (c) { return c.ok(c.el.value); });
+      }
+
+      CAMPOS.forEach(function (c) {
+        // Enquanto digita, só apaga o erro. Não acusa erro no meio da digitação.
+        c.el.addEventListener('input', function () { limparErro(c); });
+        // Ao sair do campo, acusa. Campo intocado e vazio não leva bronca.
+        c.el.addEventListener('blur', function () {
+          if (!c.el.value.trim()) return;
+          c.ok(c.el.value) ? limparErro(c) : mostrarErro(c);
+        });
       });
 
       function openModal(href) {
         checkoutHref = href;
+        CAMPOS.forEach(limparErro);   // reabrir não herda a bronca da tentativa anterior
         modal.classList.add('is-open');
         document.body.style.overflow = 'hidden';
         setTimeout(function () { elName.focus(); }, 50);
@@ -1790,7 +1825,21 @@
 
       form.addEventListener('submit', function (e) {
         e.preventDefault();
-        if (submitting || !validate()) return;
+        if (submitting) return;
+
+        // O botão não nasce mais desabilitado: clique inválido tem que produzir
+        // explicação, não silêncio. Marca todos os campos ruins e leva o foco pro primeiro.
+        if (!validate()) {
+          var primeiro = null;
+          CAMPOS.forEach(function (c) {
+            if (c.ok(c.el.value)) { limparErro(c); return; }
+            mostrarErro(c);
+            if (!primeiro) primeiro = c.el;
+          });
+          if (primeiro) primeiro.focus();
+          return;
+        }
+
         submitting = true;
         elSubmit.disabled = true;
         elSubmit.textContent = 'Aguarde...';
