@@ -399,20 +399,6 @@
   border-radius: var(--radius-md);
 }
 
-.mural-counter {
-  text-align: center;
-  margin-top: 2.5rem;
-  font-size: 1.1rem;
-  color: var(--color-ink-mid);
-}
-
-.mural-counter strong {
-  font-family: var(--font-display);
-  font-size: 2rem;
-  letter-spacing: 0.02em;
-  color: var(--color-accent-tx);
-}
-
 .mural-hook {
   text-align: center;
   margin-top: 1.25rem;
@@ -704,15 +690,15 @@
 }
 
 .ewertton-photo {
+  /* 3:4, mesma proporção do asset: object-fit cover não corta nada.
+     Canto reto liberado (§6.2) agora que a foto é recorte com alpha, sem cantos brancos. */
   width: 220px;
-  height: 220px;
-  /* DESVIO CONSCIENTE da §6.2 (canto reto), pendente de asset.
-     `ewertton-preto.jpg` é 256x256 com recorte circular sobre fundo BRANCO: não existe
-     conteúdo nos cantos. Com canto reto os 4 cantos brancos aparecem sobre o escuro.
-     Volta a circular até chegar foto retangular sem máscara (ver PENDÊNCIAS no CLAUDE.md). */
-  border-radius: 50%;
+  height: 293px;
+  border-radius: var(--radius-md);
   overflow: hidden;
-  background: var(--color-bg);
+  /* --void, mais escuro que o --pitch da seção: a transparência do recorte deixa
+     esse fundo aparecer, então ele vira o campo do retrato. */
+  background: var(--void);
   border: 3px solid var(--iron);
   display: flex;
   align-items: center;
@@ -903,16 +889,6 @@
   margin-bottom: 2rem;
   max-width: 520px;
   margin-inline: auto;
-}
-
-.btn--invert {
-  background: white;
-  color: var(--color-accent);
-}
-
-.btn--invert:hover {
-  background: rgba(255, 255, 255, 0.92);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
 }
 
 .trust-row--light {
@@ -1143,6 +1119,37 @@ footer {
 
 .lead-error[hidden] {
   display: none;
+}
+
+/* Consentimento: libera o botão de submit. Área de toque do label inteira, não só a caixa. */
+.lead-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  margin: 0.9rem 0 0.25rem;
+}
+
+.lead-consent input[type="checkbox"] {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  accent-color: var(--blood, #A61312);
+  cursor: pointer;
+}
+
+.lead-consent label {
+  font-size: 0.82rem;
+  line-height: 1.4;
+  color: var(--color-ink-mid);
+  cursor: pointer;
+}
+
+/* Botão travado tem que PARECER travado, senão o clique morto vira o mesmo
+   atrito silencioso que a validação por texto veio resolver. */
+.lead-modal__submit:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
 }
 
 .lead-phone {

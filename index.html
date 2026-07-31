@@ -17,13 +17,13 @@
   <meta property="og:title" content="Desafio 21 Dias: Da Procrastinação à Promessa">
   <meta property="og:description" content="1 áudio e 1 tarefa por dia no WhatsApp. 20 minutos. 21 dias. R$ 67.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://ebravoholding.com/pages/desafios/v4/">
-  <meta property="og:image" content="https://ebravoholding.com/pages/desafios/v4/og-image.jpg">
+  <meta property="og:url" content="https://ebravoholding.com/pages/desafios/v7/">
+  <meta property="og:image" content="https://ebravoholding.com/pages/desafios/v7/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Desafio 21 Dias: Da Procrastinação à Promessa">
+  <meta property="og:image:alt" content="Você está com medo e tem usado Deus como desculpa para não começar. Desafio 21 Dias.">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://ebravoholding.com/pages/desafios/v4/og-image.jpg">
+  <meta name="twitter:image" content="https://ebravoholding.com/pages/desafios/v7/og-image.jpg">
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="favicon/favicon.ico">
   <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg">
@@ -1105,16 +1105,15 @@
         </div>
 
         <div class="entregavel-card fade-up" style="transition-delay:0.25s">
+          <svg class="entregavel-icon" viewBox="0 0 44 44" fill="none" aria-hidden="true">
+            <circle cx="22" cy="22" r="22" style="fill:rgba(166,19,18,0.25)" />
+            <path d="M22 12c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"
+              style="stroke:var(--color-accent-tx)" stroke-width="2" />
+            <path d="M22 20c-4.42 0-8 1.79-8 4v2h16v-2c0-2.21-3.58-4-8-4z" style="stroke:var(--color-accent-tx)"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
           <div>
-            <svg class="entregavel-icon" viewBox="0 0 44 44" fill="none" aria-hidden="true"
-              style="width:36px;height:36px;margin-bottom:0.5rem">
-              <circle cx="22" cy="22" r="22" style="fill:rgba(166,19,18,0.25)" />
-              <path d="M22 12c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"
-                style="stroke:var(--color-accent-tx)" stroke-width="2" />
-              <path d="M22 20c-4.42 0-8 1.79-8 4v2h16v-2c0-2.21-3.58-4-8-4z" style="stroke:var(--color-accent-tx)"
-                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-            <!-- Selo movido pra dentro do bloco de texto: como filho direto do .entregavel-card
+            <!-- Selo dentro do bloco de texto: como filho direto do .entregavel-card
                  (display:flex) ele virava item de flex ao lado do ícone e quebrava em 3 linhas.
                  O CSS do .bonus-tag (inline-block + margin-bottom) já era escrito pra este lugar. -->
             <span class="bonus-tag">Bônus &middot; R$ 497</span>
@@ -1326,7 +1325,7 @@
       <div class="ewertton-inner">
         <div class="fade-up">
           <div class="ewertton-photo">
-            <img src="ewertton-preto.jpg" alt="Foto de Ewertton Bravo" width="220" height="220"
+            <img src="ewertton.webp" alt="Foto de Ewertton Bravo" width="220" height="293"
               style="width:100%;height:100%;object-fit:cover;display:block;">
           </div>
         </div>
@@ -1775,7 +1774,11 @@
           </div>
           <p class="lead-error" id="lead-phone-erro" role="alert" hidden></p>
         </div>
-        <button type="submit" class="btn btn--lg lead-modal__submit" id="lead-submit">
+        <div class="lead-consent">
+          <input type="checkbox" id="lead-consent" name="consent" />
+          <label for="lead-consent">Concordo em receber comunicações sobre o desafio por WhatsApp e e-mail.</label>
+        </div>
+        <button type="submit" class="btn btn--lg lead-modal__submit" id="lead-submit" disabled>
           Quero começar o desafio
         </button>
         <p class="lead-modal__hint">Seus dados ficam seguros. Sem spam.</p>
@@ -1796,8 +1799,18 @@
       var elPhone = document.getElementById('lead-phone');
       var elSubmit = document.getElementById('lead-submit');
       var elClose = document.getElementById('lead-modal-close');
+      var elConsent = document.getElementById('lead-consent');
       var checkoutHref = null;   // href já decorado com UTM+sck, guardado no clique
       var submitting = false;
+      var gatilho = null;        // elemento que abriu o modal, pra devolver o foco no fechamento
+      var CONSENT_TEXT = 'Concordo em receber comunicações sobre o desafio por WhatsApp e e-mail.';
+
+      // O consentimento LIBERA o botão; formato de campo NÃO trava o botão, acusa no clique.
+      // A diferença é proposital: o checkbox é uma regra visível logo acima do botão, então
+      // travar ali não deixa ninguém no escuro. Ja "e-mail precisa de TLD" e "nome precisa de
+      // sobrenome" sao regras invisiveis, e travar nelas foi o que fazia a pessoa sair sem saber.
+      function syncConsent() { elSubmit.disabled = !elConsent.checked; }
+      elConsent.addEventListener('change', syncConsent);
 
       function getCookie(name) {
         var m = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
@@ -1848,9 +1861,11 @@
         });
       });
 
-      function openModal(href) {
+      function openModal(href, origem) {
         checkoutHref = href;
+        gatilho = origem || null;
         CAMPOS.forEach(limparErro);   // reabrir não herda a bronca da tentativa anterior
+        syncConsent();
         modal.classList.add('is-open');
         document.body.style.overflow = 'hidden';
         setTimeout(function () { elName.focus(); }, 50);
@@ -1858,14 +1873,31 @@
       function closeModal() {
         modal.classList.remove('is-open');
         document.body.style.overflow = '';
+        if (gatilho && gatilho.focus) gatilho.focus();   // foco volta pro botão que abriu
+        gatilho = null;
       }
+
+      // Focus trap: sem isto o Tab sai do último campo e vai passeando pelos links da
+      // página atrás do véu, que o usuário nem enxerga. aria-modal="true" informa, não prende.
+      modal.addEventListener('keydown', function (e) {
+        if (e.key !== 'Tab') return;
+        var focaveis = modal.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select, textarea, [tabindex]:not([tabindex="-1"])');
+        if (!focaveis.length) return;
+        var primeiro = focaveis[0];
+        var ultimo = focaveis[focaveis.length - 1];
+        if (e.shiftKey && document.activeElement === primeiro) {
+          e.preventDefault(); ultimo.focus();
+        } else if (!e.shiftKey && document.activeElement === ultimo) {
+          e.preventDefault(); primeiro.focus();
+        }
+      });
 
       // Intercepta os botões de checkout (listener delegado; href já decorado pelo script de UTM/sck)
       document.addEventListener('click', function (e) {
         var a = e.target.closest && e.target.closest('a[href*="pay.hotmart"]');
         if (!a) return;
         e.preventDefault();
-        openModal(a.href);
+        openModal(a.href, a);
       });
 
       elClose.addEventListener('click', closeModal);
@@ -1928,6 +1960,7 @@
           sck: (function () { var m = (checkoutHref || '').match(/[?&]sck=([^&]+)/); return m ? decodeURIComponent(m[1]) : ''; })(),
           fbp: fbp, fbc: fbc,
           page_path: window.location.pathname,
+          consent: elConsent.checked, consent_text: CONSENT_TEXT,
           event_id: eventId,
           event_source_url: window.location.href
         };
