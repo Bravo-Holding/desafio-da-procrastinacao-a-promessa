@@ -1044,6 +1044,37 @@ footer {
   display: none;
 }
 
+/* Consentimento: libera o botão de submit. Área de toque do label inteira, não só a caixa. */
+.lead-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  margin: 0.9rem 0 0.25rem;
+}
+
+.lead-consent input[type="checkbox"] {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  accent-color: var(--blood, #A61312);
+  cursor: pointer;
+}
+
+.lead-consent label {
+  font-size: 0.82rem;
+  line-height: 1.4;
+  color: var(--color-ink-mid);
+  cursor: pointer;
+}
+
+/* Botão travado tem que PARECER travado, senão o clique morto vira o mesmo
+   atrito silencioso que a validação por texto veio resolver. */
+.lead-modal__submit:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
 .lead-phone {
   display: flex;
   gap: 0.5rem;

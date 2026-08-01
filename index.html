@@ -1726,7 +1726,11 @@
           </div>
           <p class="lead-error" id="lead-phone-erro" role="alert" hidden></p>
         </div>
-        <button type="submit" class="btn btn--lg lead-modal__submit" id="lead-submit">
+        <div class="lead-consent">
+          <input type="checkbox" id="lead-consent" name="consent" />
+          <label for="lead-consent">Concordo em receber comunicações sobre o desafio por WhatsApp e e-mail.</label>
+        </div>
+        <button type="submit" class="btn btn--lg lead-modal__submit" id="lead-submit" disabled>
           Quero começar o desafio
         </button>
         <p class="lead-modal__hint">Seus dados ficam seguros. Sem spam.</p>
@@ -1747,8 +1751,18 @@
       var elPhone = document.getElementById('lead-phone');
       var elSubmit = document.getElementById('lead-submit');
       var elClose = document.getElementById('lead-modal-close');
+      var elConsent = document.getElementById('lead-consent');
       var checkoutHref = null;   // href já decorado com UTM+sck, guardado no clique
       var submitting = false;
+      var gatilho = null;        // elemento que abriu o modal, pra devolver o foco no fechamento
+      var CONSENT_TEXT = 'Concordo em receber comunicações sobre o desafio por WhatsApp e e-mail.';
+
+      // O consentimento LIBERA o botao; formato de campo NAO trava o botao, acusa no clique.
+      // A diferenca e proposital: o checkbox e uma regra visivel logo acima do botao, entao
+      // travar ali nao deixa ninguem no escuro. Ja "e-mail precisa de TLD" e "nome precisa de
+      // sobrenome" sao regras invisiveis, e travar nelas foi o que fazia a pessoa sair sem saber.
+      function syncConsent() { elSubmit.disabled = !elConsent.checked; }
+      elConsent.addEventListener('change', syncConsent);
 
       function getCookie(name) {
         var m = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
@@ -1799,8 +1813,10 @@
         });
       });
 
-      function openModal(href) {
+      function openModal(href, origem) {
         checkoutHref = href;
+        gatilho = origem || null;
+        syncConsent();
         CAMPOS.forEach(limparErro);   // reabrir não herda a bronca da tentativa anterior
         modal.classList.add('is-open');
         document.body.style.overflow = 'hidden';
@@ -1809,14 +1825,31 @@
       function closeModal() {
         modal.classList.remove('is-open');
         document.body.style.overflow = '';
+        if (gatilho && gatilho.focus) gatilho.focus();   // foco volta pro botao que abriu
+        gatilho = null;
       }
+
+      // Focus trap: sem isto o Tab sai do ultimo campo e vai passeando pelos links da
+      // pagina atras do veu, que o usuario nem enxerga. aria-modal="true" informa, nao prende.
+      modal.addEventListener('keydown', function (e) {
+        if (e.key !== 'Tab') return;
+        var focaveis = modal.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select, textarea, [tabindex]:not([tabindex="-1"])');
+        if (!focaveis.length) return;
+        var primeiro = focaveis[0];
+        var ultimo = focaveis[focaveis.length - 1];
+        if (e.shiftKey && document.activeElement === primeiro) {
+          e.preventDefault(); ultimo.focus();
+        } else if (!e.shiftKey && document.activeElement === ultimo) {
+          e.preventDefault(); primeiro.focus();
+        }
+      });
 
       // Intercepta os botões de checkout (listener delegado; href já decorado pelo script de UTM/sck)
       document.addEventListener('click', function (e) {
         var a = e.target.closest && e.target.closest('a[href*="pay.hotmart"]');
         if (!a) return;
         e.preventDefault();
-        openModal(a.href);
+        openModal(a.href, a);
       });
 
       elClose.addEventListener('click', closeModal);
@@ -1879,6 +1912,7 @@
           sck: (function () { var m = (checkoutHref || '').match(/[?&]sck=([^&]+)/); return m ? decodeURIComponent(m[1]) : ''; })(),
           fbp: fbp, fbc: fbc,
           page_path: window.location.pathname,
+          consent: elConsent.checked, consent_text: CONSENT_TEXT,
           event_id: eventId,
           event_source_url: window.location.href
         };
