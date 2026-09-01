@@ -4,6 +4,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- =================== FEATURE FLAGS =================== -->
+  <!-- Unico lugar a editar pra ligar/desligar o pre-checkout. Ver CLAUDE.md > FEATURE FLAGS. -->
+  <script>
+    window.FLAGS = {
+      preCheckout: true   // true = modal de captura antes da Hotmart | false = botao vai direto pro checkout
+    };
+    // Override de teste sem deploy: ?pc=off (desliga) | ?pc=on (liga)
+    (function () {
+      var pc = new URLSearchParams(window.location.search).get('pc');
+      if (pc === 'off') window.FLAGS.preCheckout = false;
+      if (pc === 'on') window.FLAGS.preCheckout = true;
+    })();
+  </script>
+  <!-- ===================================================== -->
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
   new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -1795,6 +1810,15 @@
 
   <script>
     (function () {
+      // FLAG preCheckout: desligada, o modal sai do DOM e nenhum listener e registrado.
+      // Os <a> de checkout voltam a funcionar nativamente (UTM+sck ja estao no href).
+      // Nesse braco nao ha Lead no Pixel, nem CAPI, nem lead gravado no Supabase.
+      if (!window.FLAGS || !window.FLAGS.preCheckout) {
+        var inerte = document.getElementById('lead-modal');
+        if (inerte) inerte.remove();
+        return;
+      }
+
       var EDGE_URL = 'https://iodseuinjheacuoptaau.supabase.co/functions/v1/capture-lead';
       var PIXEL_ID = '25723610987317406';
       var VALUE = 67.00, CURRENCY = 'BRL';
